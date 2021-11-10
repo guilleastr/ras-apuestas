@@ -1,5 +1,5 @@
 # ras-apuestas
 
  - Guillermo Astorga Manzanal
- - Esther González de Vega
+ - Esther González García de Vega
  - Santiado Fidalgo Sallés
