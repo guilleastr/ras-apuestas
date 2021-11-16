@@ -50,7 +50,7 @@ module.exports = function (app, swig, gestorDB) {
                             res.redirect("/registrarse?mensaje=Error al registrar al usuario");
                         } else {
                             req.session.usuario = usuario;
-                            res.redirect("/oferta/buscar?mensaje=Nuevo usuario registrado");
+                            res.redirect("/apuestas/lista");
                         }
                     });
                 }

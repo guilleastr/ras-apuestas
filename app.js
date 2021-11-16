@@ -16,6 +16,8 @@ app.use(function (req, res, next) {
 let fs = require('fs');
 let https = require('https');
 
+let crypto = require('crypto'); //contraseña
+
 let swig = require('swig');
 let bodyParser = require('body-parser');
 let mongo = require('mongodb');
@@ -55,7 +57,8 @@ app.use(express.static('public'));
 
 // Variables
 app.set('port', 8081)
-app.set('clave', 'abcdefg');
+app.set('clave','abcdefg');
+app.set('crypto',crypto);
 
 
 app.set('db', 'mongodb://admin:admin@rasbet-shard-00-00.j0kad.mongodb.net:27017,rasbet-shard-00-01.j0kad.mongodb.net:27017,rasbet-shard-00-02.j0kad.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-tc9dn2-shard-0&authSource=admin&retryWrites=true&w=majority');
@@ -64,7 +67,6 @@ app.set('db', 'mongodb://admin:admin@rasbet-shard-00-00.j0kad.mongodb.net:27017,
 //Rutas/controladores por lógica
 require("./routes/rusuarios.js")(app, swig, gestorBD);  // (app, param1, param2, etc.)
 
-app.set('clave','abcdefg');
 app.get('/', function (req, res) {
     res.redirect('/identificarse');
 })
