@@ -47,7 +47,7 @@ app.set('db', 'mongodb://admin:admin@rasbet-shard-00-00.j0kad.mongodb.net:27017,
 
 
 //REQUIRE
-//require("./routes/rusuarios.js")(app, swig, gestorBD);  // (app, param1, param2, etc.)
+require("./routes/rusuarios.js")(app, swig, gestorBD);  // (app, param1, param2, etc.)
 
 
 
@@ -58,3 +58,4 @@ app.get('/', function (req, res) {
 app.listen(8081,function (){
     console.log("Servicor activo")
 })
+
