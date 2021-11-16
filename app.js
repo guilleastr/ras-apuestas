@@ -1,6 +1,7 @@
 //Módulos
 let express = require('express');
 let app = express();
+
 let rest = require('request');
 app.set('rest', rest);
 
@@ -13,14 +14,14 @@ app.use(function (req, res, next) {
     next();
 });
 
+let jwt = require('jsonwebtoken');
+app.set('jwt',jwt);
+
 let fs = require('fs');
 let https = require('https');
 
 let crypto = require('crypto'); //contraseña
 
-let swig = require('swig');
-let bodyParser = require('body-parser');
-let mongo = require('mongodb');
 let expressSession = require('express-session');
 app.use(expressSession({
     secret: 'abcdefg',
@@ -28,40 +29,26 @@ app.use(expressSession({
     saveUninitialized: true
 }));
 
+let mongo = require('mongodb');
+let swig = require('swig');
+let bodyParser = require('body-parser');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-
-let gestorBD = require("./modules/gestorDB");
+let gestorBD = require("./modules/gestorBD");
 gestorBD.init(app, mongo);
-
-
-
-// routerUsuarioSession
-var routerUsuarioSession = express.Router();
-
-routerUsuarioSession.use(function(req, res, next) {
-    console.log("routerUsuarioSession");
-    let criterio;
-    if ( req.session.usuario ) {
-        // dejamos correr la petición
-        next();
-    } else {
-        res.redirect("/identificarse");
-    }
-});
 
 
 
 app.use(express.static('public'));
 
 // Variables
-app.set('port', 8081)
+app.set('port', 8081);
+app.set('db', 'mongodb://admin:admin@rasbet-shard-00-00.j0kad.mongodb.net:27017,rasbet-shard-00-01.j0kad.mongodb.net:27017,rasbet-shard-00-02.j0kad.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-tc9dn2-shard-0&authSource=admin&retryWrites=true&w=majority');
 app.set('clave','abcdefg');
 app.set('crypto',crypto);
 
 
-app.set('db', 'mongodb://admin:admin@rasbet-shard-00-00.j0kad.mongodb.net:27017,rasbet-shard-00-01.j0kad.mongodb.net:27017,rasbet-shard-00-02.j0kad.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-tc9dn2-shard-0&authSource=admin&retryWrites=true&w=majority');
 
 
 //Rutas/controladores por lógica
@@ -72,6 +59,6 @@ app.get('/', function (req, res) {
 })
 
 app.listen(8081,function (){
-    console.log("Servicor activo")
+    console.log("Servidor activo")
 })
 

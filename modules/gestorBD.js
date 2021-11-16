@@ -41,7 +41,7 @@ module.exports = {
             }
         });
     },
-            // Recuperamos las ofertas de la base de datos
+    // Recuperamos las ofertas de la base de datos
     obtenerApuestas : function(criterio,funcionCallback){
             this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
                 if (err) {

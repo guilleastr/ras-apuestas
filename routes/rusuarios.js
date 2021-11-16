@@ -1,4 +1,4 @@
-module.exports = function (app, swig, gestorDB) {
+module.exports = function (app, swig, gestorBD) {
 
     // Nos redirige a la vista para registrar un usuario
     app.get("/registrarse", function (req, res) {
@@ -32,7 +32,7 @@ module.exports = function (app, swig, gestorDB) {
             let usuarioemail = {
                 email: req.body.email
             }
-            gestorDB.obtenerUsuarios(usuarioemail, function (usuarios) {
+            gestorBD.obtenerUsuarios(usuarioemail, function (usuarios) {
                 if (usuarios != null && usuarios.length !== 0) {
                     res.redirect("/registrarse?mensaje=Este email ya está registrado. Intentelo de nuevo");
                 } else {
@@ -43,7 +43,7 @@ module.exports = function (app, swig, gestorDB) {
 
                         rol: 'user'
                     };
-                    gestorDB.insertarUsuario(usuario, function (id) {
+                    gestorBD.insertarUsuario(usuario, function (id) {
 
                         if (id == null) {
                             // res.send("Error al insertar el usuario");
@@ -80,7 +80,7 @@ module.exports = function (app, swig, gestorDB) {
             email: req.body.email,
             password: seguro
         }
-        gestorDB.obtenerUsuarios(criterio, function (usuarios) {
+        gestorBD.obtenerUsuarios(criterio, function (usuarios) {
             if (usuarios == null || usuarios.length == 0) {
                 req.session.usuario = null;
                 // res.send("No identificado: ");
