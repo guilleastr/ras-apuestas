@@ -3,8 +3,6 @@ let express = require('express');
 let app = express();
 let rest = require('request');
 app.set('rest', rest);
-let jwt = require('jsonwebtoken');
-app.set('jwt', jwt);
 
 
 
@@ -35,7 +33,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 
-let gestorBD = require("./modules/gestorBD.js");
+let gestorBD = require("./modules/gestorDB");
 gestorBD.init(app, mongo);
 
 app.use(express.static('public'));
@@ -49,22 +47,14 @@ app.set('db', 'mongodb://admin:admin@rasbet-shard-00-00.j0kad.mongodb.net:27017,
 
 
 //REQUIRE
-require("./routes/rusuarios.js")(app, swig, gestorBD);  // (app, param1, param2, etc.)
-require("./routes/rOfertas.js")(app, swig, gestorBD);
-require("./routes/API-REST-js")(app, gestorBD);
+//require("./routes/rusuarios.js")(app, swig, gestorBD);  // (app, param1, param2, etc.)
+
 
 
 app.get('/', function (req, res) {
     res.redirect('/identificarse');
 })
 
-
-
-
-https.createServer({
-    key: fs.readFileSync('certificates/alice.key'),
-    cert: fs.readFileSync('certificates/alice.crt')
-}, app).listen(app.get('port'), function () {
-
-    app.get("logger").info("Servidor Inciado")
-});
+app.listen(8081,function (){
+    console.log("Servicor activo")
+})
