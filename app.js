@@ -4,9 +4,6 @@ let app = express();
 let rest = require('request');
 app.set('rest', rest);
 
-
-
-
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Credentials", "true");
@@ -36,6 +33,24 @@ app.use(bodyParser.urlencoded({extended: true}));
 let gestorBD = require("./modules/gestorDB");
 gestorBD.init(app, mongo);
 
+
+
+// routerUsuarioSession
+var routerUsuarioSession = express.Router();
+
+routerUsuarioSession.use(function(req, res, next) {
+    console.log("routerUsuarioSession");
+    let criterio;
+    if ( req.session.usuario ) {
+        // dejamos correr la petición
+        next();
+    } else {
+        res.redirect("/identificarse");
+    }
+});
+
+
+
 app.use(express.static('public'));
 
 // Variables
@@ -46,11 +61,10 @@ app.set('clave', 'abcdefg');
 app.set('db', 'mongodb://admin:admin@rasbet-shard-00-00.j0kad.mongodb.net:27017,rasbet-shard-00-01.j0kad.mongodb.net:27017,rasbet-shard-00-02.j0kad.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-tc9dn2-shard-0&authSource=admin&retryWrites=true&w=majority');
 
 
-//REQUIRE
+//Rutas/controladores por lógica
 require("./routes/rusuarios.js")(app, swig, gestorBD);  // (app, param1, param2, etc.)
 
-
-
+app.set('clave','abcdefg');
 app.get('/', function (req, res) {
     res.redirect('/identificarse');
 })

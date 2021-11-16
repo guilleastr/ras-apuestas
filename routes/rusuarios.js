@@ -1,4 +1,4 @@
-module.exports = function (app, swig, gestorBD) {
+module.exports = function (app, swig, gestorDB) {
 
     // Nos redirige a la vista para registrar un usuario
     app.get("/registrarse", function (req, res) {
@@ -23,9 +23,6 @@ module.exports = function (app, swig, gestorBD) {
         } else if (req.body.password.length < 4) {
             res.redirect("/registrarse?mensaje=La contraseña debe tener 4 o más caracteres");
             return;
-        } else if (req.body.apellidos.length < 2) {
-            res.redirect("/registrarse?mensaje=El apellido debe tener mas de 2 caracteres");
-            return;
         } else if (req.body.password !== req.body.rpassword) {
             res.redirect("/registrarse?mensaje=Las contraseñas no coinciden.");
             return;
@@ -35,19 +32,18 @@ module.exports = function (app, swig, gestorBD) {
             let usuarioemail = {
                 email: req.body.email
             }
-            gestorBD.obtenerUsuarios(usuarioemail, function (usuarios) {
+            gestorDB.obtenerUsuarios(usuarioemail, function (usuarios) {
                 if (usuarios != null && usuarios.length !== 0) {
                     res.redirect("/registrarse?mensaje=Este email ya está registrado. Intentelo de nuevo");
                 } else {
                     let usuario = {
                         email: req.body.email,
                         nombre: req.body.nombre,
-                        apellidos: req.body.apellidos,
                         password: seguro,
-                        rol: 'user',
-                        money: 0.0
+
+                        rol: 'user'
                     };
-                    gestorBD.insertarUsuario(usuario, function (id) {
+                    gestorDB.insertarUsuario(usuario, function (id) {
 
                         if (id == null) {
                             // res.send("Error al insertar el usuario");
@@ -84,7 +80,7 @@ module.exports = function (app, swig, gestorBD) {
             email: req.body.email,
             password: seguro
         }
-        gestorBD.obtenerUsuarios(criterio, function (usuarios) {
+        gestorDB.obtenerUsuarios(criterio, function (usuarios) {
             if (usuarios == null || usuarios.length == 0) {
                 req.session.usuario = null;
                 // res.send("No identificado: ");
