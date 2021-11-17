@@ -2,8 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1a999f6e-0712-4ea4-90fd-2bda813ad806" name="Default Changelist" comment="inicio sesion + logo">
+      <change afterPath="$PROJECT_DIR$/routes/radmin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/badmin.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/bagregarapuesta.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/blistadousuariosadmin.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/blistarapuestas.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/gestorBD.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/gestorBD.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/rapuestas.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/rapuestas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/rusuarios.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/rusuarios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/bapuestas.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/bregistro.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/bregistro.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +31,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="210n82IFWu2iNhuqCYzTtvjSnIx" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -91,29 +110,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/modules/gestorBD.js</url>
-          <line>18</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/modules/gestorBD.js</url>
-          <line>15</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/modules/gestorBD.js</url>
-          <line>10</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

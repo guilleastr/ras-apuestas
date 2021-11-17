@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block titulo %} Listado de apuestas {% endblock %}
+{% block contenido_principal %}
+
+
+<h2>Listado de apuestas</h2>
+<div class="table-responsive">
+    <table class="table table-hover">
+
+        <thead>
+        <tr>
+            <th> </th>
+            <th>Tipo de deporte</th>
+            <th>Equipo local</th>
+            <th>Equipo visitante</th>
+            <th>Cuota local</th>
+            <th>Cuota visitante</th>
+            <th>Cuota empate</th>
+            <th>Estado de la apuesta</th>
+            {% if usuarioSesion.rol === 'admin'%}
+            <th>Abrir/Cerrar</th>
+
+            {% endif %}
+
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Inicio del Bloque oferta -->
+        {% for apuesta in apuestas %}
+        <tr>
+            <td></td>
+            <td>{{ apuesta.tipodep }}</td>
+            <td>{{ apuesta.local }} </td>
+            <td>{{ apuesta.visitante }} </td>
+            <td>{{ apuesta.cuotalocal }} </td>
+            <td>{{ apuesta.cuotavisitante }} </td>
+            <td>{{ apuesta.cuotaempate }} </td>
+            {% if apuesta.estado === 'disponible'%}
+            <td>Abierta</td>
+            {% else %}
+            <td>Cerrada</td>
+            {% endif %}
+            {% if usuarioSesion.rol === 'admin' && apuesta.estado === 'disponible'%}
+            <td>
+                <a id="btCerrarApuesta" href="/apuesta/cerrar/{{ apuesta._id.toString() }}">Cerrar</a> <br>
+            </td>
+            {% elif usuarioSesion.rol === 'user' && apuesta.estado === 'disponible'%}
+            <td>
+                <a id="btApostar" href="/apuesta/apostar/{{ apuesta._id.toString() }}">APOSTAR</a> <br>
+            </td>
+            {% elif usuarioSesion.rol === 'user' && apuesta.estado === 'no disponible'%}
+            <td> APUESTA CERRADA </td>
+            {% endif %}
+            <td></td>
+
+
+        </tr>
+        {% endfor %}
+        <!-- Fin del Bloque oferta -->
+        </tbody>
+
+    </table>
+</div>
+{% endblock %}

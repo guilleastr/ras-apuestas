@@ -35,9 +35,43 @@ let bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-let gestorBD = require("./modules/gestorBD.js"); gestorBD.init(app,mongo);
+let gestorBD = require("./modules/gestorBD.js");
 gestorBD.init(app, mongo);
 
+// routerUsuarioSession
+var routerUsuarioSession = express.Router();
+
+routerUsuarioSession.use(function(req, res, next) {
+    console.log("routerUsuarioSession");
+    let criterio;
+    if ( req.session.usuario ) {
+        // dejamos correr la petición
+        next();
+    } else {
+        res.redirect("/identificarse");
+    }
+});
+
+//Aplicar routerUsuarioSession
+app.use("/apuesta/*",routerUsuarioSession);
+app.use("/usuario/*",routerUsuarioSession);
+app.use("/admin",routerUsuarioSession);
+
+//routerUsuarioAdmin
+let routerUsuarioAdmin = express.Router();
+
+routerUsuarioAdmin.use(function(req, res, next) {
+    console.log("routerUsuarioAdmin");
+    if (req.session.usuario !== undefined && req.session.usuario.rol === 'admin') {
+        // dejamos correr la petición
+        next();
+    } else {
+        res.redirect("/index");
+    }
+});
+//Aplicar routerUsuarioAdmin
+app.use("/usuario/*" ,routerUsuarioAdmin);
+app.use("/admin", routerUsuarioAdmin);
 
 
 app.use(express.static('public'));
@@ -48,11 +82,10 @@ app.set('db', 'mongodb://admin1:rasbet@cluster0-shard-00-00.l1v00.mongodb.net:27
 app.set('clave','abcdefg');
 app.set('crypto',crypto);
 
-
-
-
 //Rutas/controladores por lógica
-require("./routes/rusuarios.js")(app, swig, gestorBD);  // (app, param1, param2, etc.)
+require("./routes/rusuarios.js")(app, swig, gestorBD);
+require("./routes/radmin.js")(app, swig, gestorBD);
+require("./routes/rapuestas.js")(app, swig, gestorBD);
 
 app.get('/', function (req, res) {
     res.redirect('/identificarse');
