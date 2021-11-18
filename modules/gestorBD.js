@@ -41,7 +41,25 @@ module.exports = {
             }
         });
     },
-    // Recuperamos las ofertas de la base de datos
+    // Intersamos una apuesta a la base de datos
+    insertarApuesta: function(apuesta, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                let collection = db.collection('apuestas');
+                collection.insertOne(apuesta, function(err, result) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(result.ops[0]._id);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+    // Recuperamos las apuestas de la base de datos
     obtenerApuestas : function(criterio,funcionCallback){
             this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
                 if (err) {
@@ -58,5 +76,43 @@ module.exports = {
                     });
                 }
             });
+        },
+    // Modificamos una apuesta que se encuentre en la base
+    modificarApuesta: function (criterio, apuesta, funcionCallback) {
+    this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
+        if (err) {
+            funcionCallback(null);
+        } else {
+            let collection = db.collection('apuestas');
+            collection.update(criterio, {$set: apuesta}, function (err, result) {
+                if (err) {
+                    funcionCallback(null);
+                } else {
+                    funcionCallback(result);
+                }
+                db.close();
+            });
         }
+    });
+
+},
+    // Borrar un usuario de la base
+    borrarUsuario: function(criterio,funcionCallback){
+    this.mongo.MongoClient.connect(this.app.get('db'),function (err,db){
+        if(err){
+            funcionCallback(null);
+        }else{
+            let collection=db.collection('usuarios');
+            collection.remove(criterio, function (err, result) {
+                if (err) {
+                    funcionCallback(null);
+                } else {
+                    funcionCallback(result);
+                }
+
+                db.close();
+            });
+        }
+    });
+}
 }

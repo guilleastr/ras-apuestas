@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block titulo %} Registrar usuario {% endblock %}
+
+{% block contenido_principal %}
+<h2>Registrar usuario</h2>
+<form class="form-horizontal" method="post" action="/apuesta/agregar" >
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="tipo">Tipo deporte:</label>
+        <div class="col-sm-10">
+            <input type="text" id="tipo" class="form-control" name="tipo"
+                   placeholder="Real Oviedo" required="true" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="local">Equipo local:</label>
+        <div class="col-sm-10">
+            <input type="text" id="local" class="form-control" name="local"
+                   placeholder="Real Oviedo" required="true" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="visit">Equipo visitante:</label>
+        <div class="col-sm-10">
+            <input type="text" id="visit" class="form-control" name="visit"
+                   placeholder="Real Sporting" required="true" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="cuotalocal">Cuota local:</label>
+        <div class="col-sm-10">
+            <input type="number" id="cuotalocal" class="form-control" name="cuotalocal"
+                   placeholder="1" required="true" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="cuotavisit">Cuota visitante:</label>
+        <div class="col-sm-10">
+            <input type="number" id="cuotavisit" class="form-control" name="cuotavisit"
+                   placeholder="1" required="true" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="cuotaemp">Cuota visitante:</label>
+        <div class="col-sm-10">
+            <input type="number" id="cuotaemp" class="form-control" name="cuotaemp"
+                   placeholder="1" required="true" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary" id="aceptar">Registrar apuesta</button>
+        </div>
+    </div>
+    </div>
+</form>
+{% endblock %}
