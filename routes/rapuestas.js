@@ -109,5 +109,63 @@ module.exports = function (app, swig, gestorBD) {
     app.get('/apuesta/apostar/:id', function (req, res) {
         let criterio = {"_id": gestorBD.mongo.ObjectID(req.params.id)};
         //FALTA POR HACER
+        gestorBD.obtenerApuestas(criterio, function (apuestas){
+            if(apuestas==null||apuestas.length==0||apuestas[0].estado=="no disponible"){
+                res.redirect("/apuesta/list?mensaje=La apuesta no existe o no está disponible")
+            }
+            else {
+                let respuesta = swig.renderFile('views/bapuesta.html', {
+                    usuarioSesion: req.session.usuario,
+                    apuesta:apuestas[0]
+                });
+                res.send(respuesta);
+            }
+        })
     });
+
+    app.post("/apuesta/apostar/:id",function (req,res){
+        var apuesta = {
+            id:gestorBD.mongo.ObjectID(req.params.id),
+            equipo:req.query.equipo,
+            money:req.body.money,
+            usuario:gestorBD.mongo.ObjectID(req.session.usuario._id)
+        }
+
+        var criterio={_id:gestorBD.mongo.ObjectID(req.session.usuario._id)}
+
+        gestorBD.obtenerUsuarios(criterio,function(usuarios){
+            if(usuarios==null||usuarios.length==0){
+
+            }else{
+                let usuario=usuarios[0]
+                let user_money=Number(usuario.money)
+                let apuesta_money=Number(apuesta.money)
+                if(user_money>apuesta_money){
+                    gestorBD.insertarApuestaUsuario(apuesta,function (apuesta){
+                        if(apuesta==null){
+                            res.redirect("/apuesta/aposta/"+req.params.id+"?mensaje=Error al realizar la apuesta")
+                        }else{
+                            usuario.money=String(user_money-apuesta_money)
+
+                            gestorBD.actualizarUsuario(criterio,usuario,function(usuario){
+                                if(usuario==null){
+
+                                }
+                                else{
+                                    res.redirect("/apuesta/misapuestas");
+                                }
+                            })
+
+
+                        }
+                    })
+                }
+
+            }
+        })
+
+
+
+
+    })
 }

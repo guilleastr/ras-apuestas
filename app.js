@@ -85,7 +85,7 @@ app.set('crypto',crypto);
 //Rutas/controladores por lógica
 require("./routes/rusuarios.js")(app, swig, gestorBD);
 require("./routes/radmin.js")(app, swig, gestorBD);
-require("./routes/rapuestas.js")(app, swig, gestorBD);
+require("./routes/rapuestas.js")(app, swig, gestorBD,mongo);
 
 app.get('/', function (req, res) {
     res.redirect('/identificarse');

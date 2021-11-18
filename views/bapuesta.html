@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block titulo %} Apostar {% endblock %}
+
+{% block contenido_principal %}
+<style>
+    .column {
+        float: left;
+        width: 50%;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    h2{
+        alignment: center;
+    }
+
+    button{
+        alignment: right;
+    }
+</style>
+<h2>Apostar</h2>
+
+<p><strong>Categoría: {{apuesta.tipodep}}</strong></p>
+<p>Fecha{{apuesta.fecha}}</p>
+
+<div class="row">
+    <div class="column">
+        <h3> Equipo visitante : {{apuesta.visitante}} </h3>
+
+        <p>Cuota:  {{apuesta.cuotavisitante}}
+        <form  method="post" action="/apuesta/apostar/{{apuesta._id.toString()}}?equipo=visitante">
+            <input id="money" type="number" class="form-control" name="money" placeholder="Dinero a apostar: ej 2.50" required="true" />
+            <input type="submit" value="Apostar visitante" />
+
+        </form>
+        </p>
+
+    </div>
+    <div class="column">
+        <h3> Equipo local: {{apuesta.local}}</h3>
+        <p>Cuota: {{apuesta.cuotalocal}}
+            <form method="post" action="/apuesta/apostar/{{apuesta._id.toString()}}?equipo=local">
+                <input id="money" type="number" class="form-control" name="money" placeholder="Dinero a apostar: ej 2.50" required="true" />
+
+                <input type="submit" value="Apostar local" />
+
+            </form>
+        </p>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}

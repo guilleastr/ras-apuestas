@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1a999f6e-0712-4ea4-90fd-2bda813ad806" name="Default Changelist" comment="inicio sesion + logo">
-      <change afterPath="$PROJECT_DIR$/routes/radmin.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/badmin.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/bagregarapuesta.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/blistadousuariosadmin.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/blistarapuestas.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/bapuesta.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/gestorBD.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/gestorBD.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/rapuestas.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/rapuestas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/rusuarios.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/rusuarios.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/bapuestas.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/bregistro.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/bregistro.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,10 +45,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/package.json" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="Node.js.aa">
-    <configuration name="aa" type="NodeJSConfigurationType" working-dir="$PROJECT_DIR$">
+  <component name="RunManager" selected="Node.js.app.js">
+    <configuration name="app.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/app.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
     <configuration default="true" type="js.build_tools.npm">
@@ -78,9 +71,14 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Node.js.aa" />
+      <item itemvalue="Node.js.app.js" />
       <item itemvalue="npm.test" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.app.js" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -110,5 +108,35 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
+          <line>154</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
+          <line>150</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
+          <line>149</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/modules/gestorBD.js</url>
+          <line>33</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

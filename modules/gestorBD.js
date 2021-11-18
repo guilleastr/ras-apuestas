@@ -4,6 +4,7 @@ module.exports = {
     init: function (app, mongo) {
         this.mongo = mongo;
         this.app = app;
+
     },
     // Añadimos un nuevo usuario a la base
     insertarUsuario: function (usuario, funcionCallback) {
@@ -14,6 +15,23 @@ module.exports = {
                 let collection = db.collection('usuarios');
                 collection.insert(usuario, function (err, result) {
                     if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(result.ops[0]._id);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+    actualizarUsuario: function (criterio, usuario, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                let collection = db.collection('usuarios');
+                collection.findOneAndUpdate(criterio,usuario, function (err, result) {
+                    if (result.ok!=1) {
                         funcionCallback(null);
                     } else {
                         funcionCallback(result.ops[0]._id);
@@ -48,6 +66,24 @@ module.exports = {
                 funcionCallback(null);
             } else {
                 let collection = db.collection('apuestas');
+                collection.insertOne(apuesta, function(err, result) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(result.ops[0]._id);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+    // Intersamos una apuesta de un usuario a la base de datos
+    insertarApuestaUsuario: function(apuesta, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                let collection = db.collection('apuestas_usuarios');
                 collection.insertOne(apuesta, function(err, result) {
                     if (err) {
                         funcionCallback(null);
