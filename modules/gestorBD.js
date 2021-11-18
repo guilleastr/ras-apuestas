@@ -31,11 +31,9 @@ module.exports = {
             } else {
                 let collection = db.collection('usuarios');
                 collection.findOneAndUpdate(criterio,usuario, function (err, result) {
-                    if (result.ok!=1) {
+
                         funcionCallback(null);
-                    } else {
-                        funcionCallback(result.ops[0]._id);
-                    }
+
                     db.close();
                 });
             }
@@ -89,6 +87,24 @@ module.exports = {
                         funcionCallback(null);
                     } else {
                         funcionCallback(result.ops[0]._id);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+    // Recuperamos las apuestas de la base de datos
+    obtenerApuestasUsuario : function(criterio,funcionCallback){
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                let collection = db.collection('apuestas_usuarios');
+                collection.find(criterio).toArray(function(err, apuestas) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(apuestas);
                     }
                     db.close();
                 });

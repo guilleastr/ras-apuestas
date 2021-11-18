@@ -106,6 +106,36 @@ module.exports = function (app, swig, gestorBD) {
         });
     });
 
+    app.get("/apuesta/misapuestas",function (req,res){
+        let criterio={usuario:gestorBD.mongo.ObjectId(req.session.usuario._id)}
+
+        gestorBD.obtenerApuestasUsuario(criterio,function (apuestas_usuario){
+            if(apuestas_usuario==null){
+
+            }
+            else{
+                let list=[]
+                for( let i=0; i<apuestas_usuario.length;i++){
+                    list.push(apuestas_usuario[i].id)
+                }
+                criterio={"_id":{"$in":list}}
+                gestorBD.obtenerApuestas(criterio,function (apuestas){
+                    if(apuestas==null){
+
+                    }
+                    else{
+
+                        let respuesta = swig.renderFile('views/bapuestas_propias.html', {
+                            usuarioSesion: req.session.usuario,
+                            apuestas:apuestas
+                        });
+                        res.send(respuesta);
+                    }
+                })
+            }
+
+        })
+    })
     app.get('/apuesta/apostar/:id', function (req, res) {
         let criterio = {"_id": gestorBD.mongo.ObjectID(req.params.id)};
         //FALTA POR HACER
@@ -148,12 +178,9 @@ module.exports = function (app, swig, gestorBD) {
                             usuario.money=String(user_money-apuesta_money)
 
                             gestorBD.actualizarUsuario(criterio,usuario,function(usuario){
-                                if(usuario==null){
 
-                                }
-                                else{
                                     res.redirect("/apuesta/misapuestas");
-                                }
+
                             })
 
 
