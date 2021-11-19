@@ -35,7 +35,7 @@ module.exports = function (app, swig, gestorBD) {
             cuotaempate: req.body.cuotaemp,
             tipodep: req.body.tipo,
             fecha: now.toDateString(),
-            estado: 'disponible'
+            estado: 'abierta'
         }
 
         // Conectarse a la base de datos e insertarla
@@ -269,7 +269,7 @@ module.exports = function (app, swig, gestorBD) {
 
                                         gestorBD.actualizarUsuario(criterio, usuario, function (usuario) {
 
-                                            res.redirect("/apuesta/misapuestas");
+                                            res.redirect("/apuesta/misapuestas?mensaje=Apuesta realizada");
 
                                         })
 
@@ -314,7 +314,7 @@ module.exports = function (app, swig, gestorBD) {
 
                         let apuesta = apuestas_usuario[0]
                         apuesta.cobrada = true
-                        gestorBD.actualizarApuestaUsuario(criterio, apuesta, function (apuesta) {
+                        gestorBD.actualizarApuestasUsuario(criterio, apuesta, function (apuesta) {
 
                             res.redirect("/apuesta/misapuestas?mensaje=Apuesta cobrada");
                         })

@@ -76,7 +76,7 @@ routerUsuarioAdmin.use(function (req, res, next) {
 });
 
 //Aplicar routerUsuarioSession
-app.use("/apuesta/cerrar/*", routerUsuarioAdmin)
+
 app.use("/apuesta/*", routerUsuarioSession);
 app.use("/usuario/*", routerUsuarioSession);
 app.use("/admin", routerUsuarioAdmin);
@@ -85,6 +85,8 @@ app.use("/admin", routerUsuarioAdmin);
 //Aplicar routerUsuarioAdmin
 app.use("/usuario/*", routerUsuarioAdmin);
 app.use("/admin", routerUsuarioAdmin);
+app.use("/apuesta/cerrar/*", routerUsuarioAdmin)
+app.use("/apuesta/agregar/*", routerUsuarioAdmin)
 
 
 app.use(express.static('public'));
