@@ -111,7 +111,7 @@ module.exports = {
             }
         });
     },
-    actualizarApuestaUsuario: function (criterio, usuario, funcionCallback) {
+    actualizarApuestasUsuario: function (criterio, usuario, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
             if (err) {
                 funcionCallback(null);
@@ -119,7 +119,7 @@ module.exports = {
                 let collection = db.collection('apuestas_usuarios');
                 collection.findOneAndUpdate(criterio,usuario, function (err, result) {
 
-                    funcionCallback(null);
+                    funcionCallback(result);
 
                     db.close();
                 });
@@ -144,6 +144,23 @@ module.exports = {
                 }
             });
         },
+    insertarNotificacion: function(apuestas, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                let collection = db.collection('notificaciones');
+                collection.insertMany(apuestas, function(err, result) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(result.ops);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
     // Modificamos una apuesta que se encuentre en la base
     modificarApuesta: function (criterio, apuesta, funcionCallback) {
     this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {

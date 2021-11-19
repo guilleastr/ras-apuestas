@@ -80,6 +80,23 @@ module.exports = function (app, swig, gestorBD) {
 
     app.get('/apuesta/cerrar/:id', function (req, res) {
         let criterio = {"_id": gestorBD.mongo.ObjectID(req.params.id)};
+        //FALTA POR HACER
+        gestorBD.obtenerApuestas(criterio, function (apuestas) {
+            if (apuestas == null || apuestas.length == 0 || apuestas[0].estado == "cerrada") {
+                res.redirect("/apuesta/list?mensaje=La apuesta no existe o no está disponible")
+            } else {
+                let respuesta = swig.renderFile('views/bapuesta-admin.html', {
+                    usuarioSesion: req.session.usuario,
+                    apuesta: apuestas[0]
+                });
+                res.send(respuesta);
+            }
+        })
+    });
+
+    app.post("/apuesta/cerrar/:id", function (req,res){
+        let criterio = {"_id": gestorBD.mongo.ObjectID(req.params.id)};
+        let ganador= req.query.equipo;
         gestorBD.obtenerApuestas(criterio, function (apuestas) {
             if (apuestas == null) {
                 res.send(respuesta);
@@ -92,19 +109,64 @@ module.exports = function (app, swig, gestorBD) {
                     cuotaempate: apuestas[0].cuotaempate,
                     tipodep: apuestas[0].tipodep,
                     fecha: apuestas[0].fecha,
-                    estado: 'no disponible'
+                    estado: 'cerrada'
                 }
                 gestorBD.modificarApuesta(criterio, apuesta, function (result) {
                     if (result == null) {
                         res.send("Error al modificar la apuesta");
                     } else {
-                        res.redirect("/apuesta/list");
+
+                        let criterio_apuesta_update={
+                            apuesta:gestorBD.mongo.ObjectId(req.params.id),
+                            equipo:ganador
+                        }
+
+                        let apuesta={
+                            "$set": {
+                                ganada:true
+                            }
+                        }
+
+                        gestorBD.actualizarApuestasUsuario(criterio_apuesta_update, apuesta, function (result){
+                            let criterio_apuesta={
+                                apuesta:gestorBD.mongo.ObjectId(req.params.id)
+                            }
+
+                            gestorBD.obtenerApuestasUsuario(criterio_apuesta, function (apuestas_usuarios){
+                                if(apuestas_usuarios==null){
+                                    res.redirect("/apuestas/list?mensaje=Error cerrando la apuesta")
+                                }else{
+                                    let list=[]
+                                    for(let i =0; i<apuestas_usuarios.length;i++){
+                                        let notificacion={
+                                            usuario:apuestas_usuarios[i].usuario,
+                                            apuesta:gestorBD.mongo.ObjectId(req.params.id)
+                                        }
+                                        list.push(notificacion)
+
+                                    }
+
+                                    gestorBD.insertarNotificacion(list, function (id){
+                                        if(id===null){
+                                            console.log("Error enviando notificación)")
+                                        }else{
+                                            res.redirect("/apuesta/list?mensaje=Apuesta cerrada");
+                                        }
+                                    })
+
+
+                                }
+                            })
+                        })
+
+
+
                     }
                 })
 
             }
         });
-    });
+    })
 
     app.get("/apuesta/misapuestas", function (req, res) {
         let criterio = {usuario: gestorBD.mongo.ObjectId(req.session.usuario._id)}
@@ -115,7 +177,7 @@ module.exports = function (app, swig, gestorBD) {
             } else {
                 let list = []
                 for (let i = 0; i < apuestas_usuario.length; i++) {
-                    list.push(apuestas_usuario[i].id)
+                    list.push(apuestas_usuario[i].apuesta)
                 }
                 criterio = {"_id": {"$in": list}}
                 gestorBD.obtenerApuestas(criterio, function (apuestas) {
@@ -124,7 +186,7 @@ module.exports = function (app, swig, gestorBD) {
                     } else {
                         for (let i = 0; i < apuestas.length; i++) {
                             for (let j = 0; j < apuestas_usuario.length; j++) {
-                                if (apuestas[i]._id.toString() == apuestas_usuario[i].id.toString()) {
+                                if (apuestas[i]._id.toString() == apuestas_usuario[i].apuesta.toString()) {
                                     apuestas[i].apuesta_usuario = apuestas_usuario[i];
 
                                 }
@@ -147,7 +209,7 @@ module.exports = function (app, swig, gestorBD) {
         let criterio = {"_id": gestorBD.mongo.ObjectID(req.params.id)};
         //FALTA POR HACER
         gestorBD.obtenerApuestas(criterio, function (apuestas) {
-            if (apuestas == null || apuestas.length == 0 || apuestas[0].estado == "no disponible") {
+            if (apuestas == null || apuestas.length == 0 || apuestas[0].estado == "cerrada") {
                 res.redirect("/apuesta/list?mensaje=La apuesta no existe o no está disponible")
             } else {
                 let respuesta = swig.renderFile('views/bapuesta.html', {
@@ -161,7 +223,7 @@ module.exports = function (app, swig, gestorBD) {
 
     app.post("/apuesta/apostar/:id", function (req, res) {
         var apuesta = {
-            id: gestorBD.mongo.ObjectID(req.params.id),
+            apuesta: gestorBD.mongo.ObjectID(req.params.id),
             equipo: req.query.equipo,
             money: req.body.money,
             usuario: gestorBD.mongo.ObjectID(req.session.usuario._id),

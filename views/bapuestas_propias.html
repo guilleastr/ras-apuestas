@@ -48,7 +48,7 @@
             <td>{{apuesta.apuesta_usuario.cuota}}</td>
 
 
-            {% if apuesta.estado === 'abierta' &&usuarioSesion.rol !== 'admin' && !apuesta.apuesta_usuario.ganada%}
+            {% if apuesta.estado === 'abierta' &&usuarioSesion.rol !== 'admin'%}
                 <td> Sin resultado</td>
             {% elif apuesta.apuesta_usuario.cobrada %}
             <td> Cobrada</td>

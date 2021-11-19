@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block titulo %} Apostar {% endblock %}
+
+{% block contenido_principal %}
+<style>
+
+    .column {
+        float: left;
+        width: 29%;
+        border-radius: 10px;
+        background: lightcyan;
+        margin: 23px;
+        padding: 5px;
+    }
+    .bet{
+        border-radius: 10px;
+        background: lightblue;
+        margin: 23px;
+        padding: 20px;
+    }
+
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .child {
+        width: 30%;
+    }
+
+    .text_important{
+        font-size: 20px;
+    }
+
+    h2{
+        alignment: center;
+    }
+
+    button{
+        alignment: right;
+    }
+    input{
+        alignment: right;
+    }
+</style>
+
+<div class="bet">
+    <h2>Cerrar apuesta</h2>
+
+    <p class="text_important"><strong>Categoría: {{apuesta.tipodep}}</strong></p>
+    <p class="text_important">Fecha: {{apuesta.fecha}}</p>
+
+    <div class="row">
+        <div class="column">
+            <h3> Equipo visitante : {{apuesta.visitante}} </h3>
+            <p>Cuota:  {{apuesta.cuotavisitante}}
+                {%if apuesta.estado==="abierta"%}
+            <form  method="post" action="/apuesta/cerrar/{{apuesta._id.toString()}}?equipo=visitante">
+                <input type="submit" value="Gana visitante" />
+            </form>
+            {%endif%}
+            </p>
+
+        </div>
+        <div class="column">
+            <h3>Empate </h3>
+            <p>Cuota: {{apuesta.cuotaempate}}
+                {%if apuesta.estado==="abierta"%}
+            <form method="post" action="/apuesta/cerrar/{{apuesta._id.toString()}}?equipo=empate">
+                <input type="submit" value="Gana empate" />
+            </form>
+            {%endif%}
+            </p>
+        </div>
+        <div class="column">
+            <h3> Equipo local: {{apuesta.local}}</h3>
+            <p>Cuota: {{apuesta.cuotalocal}}
+                {%if apuesta.estado==="abierta"%}
+            <form method="post" action="/apuesta/cerrar/{{apuesta._id.toString()}}?equipo=local">
+                <input type="submit" value="Gana local" />
+            </form>
+            {%endif%}
+            </p>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+{% endblock %}
