@@ -3,16 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1a999f6e-0712-4ea4-90fd-2bda813ad806" name="Default Changelist" comment="inicio sesion + logo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/gestorBD.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/gestorBD.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/rapuestas.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/rapuestas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/rusuarios.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/rusuarios.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/bagregarapuesta.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/bagregarevento.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/bapuesta-admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/bapuesta-admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/bapuestas_propias.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/bapuestas_propias.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/bagregarevento.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/bagregarevento.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/blistarapuestas.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/blistarapuestas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/bnotificaciones.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/bnotificaciones.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +139,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637343663968</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Cambios de nombres">
+      <created>1637347115493</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1637347115493</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,7 +172,8 @@
     <MESSAGE value="Notificaciones&#10;Vista extra de la Apuesta" />
     <MESSAGE value="Cambios estéticos" />
     <MESSAGE value="Más cambios y ajustes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Más cambios y ajustes" />
+    <MESSAGE value="Cambios de nombres" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cambios de nombres" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
