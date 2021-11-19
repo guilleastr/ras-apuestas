@@ -50,11 +50,7 @@ module.exports = function (app, swig, gestorBD) {
     });
 
 
-    /*
-        Un usuario identificado con perfil de Usuario Estándar debe poder acceder a una lista en la que figuren
-        todas sus ofertas. Para cada oferta se mostrará: texto descriptivo de la oferta, detalle de la oferta y
-        cantidad solicitada en euros.
-         */
+
     app.get("/apuesta/list", function (req, res) {
         let usuarioSesion = req.session.usuario;
         if (usuarioSesion == null) {
@@ -330,5 +326,34 @@ module.exports = function (app, swig, gestorBD) {
 
     app.get("/apuestas/notificaciones", function (req, res) {
 
+    });
+
+    app.get("/apuesta/buscar", function(req,res){
+        var criterio={};
+        if (req.query.busqueda != null) {
+            criterio = {
+                $or: [
+                    {
+                        tipodep: {
+                            $regex: ".*" + req.query.busqueda + ".*", $options: 'i'
+                        }
+                    }
+                ]
+            };
+        }
+        gestorBD.obtenerApuestas(criterio, function (apuestas) {
+            if (apuestas == null) {
+                res.send("Error al listar");
+            } else {
+
+                let respuesta = swig.renderFile('views/blistarapuestas.html',
+                    {
+                        apuestas: apuestas,
+                        usuarioSesion: req.session.usuario,
+                        busqueda: req.query.busqueda
+                    });
+                res.send(respuesta);
+            }
+        });
     })
 }
