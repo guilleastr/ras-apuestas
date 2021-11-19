@@ -161,6 +161,23 @@ module.exports = {
             }
         });
     },
+    obtenerNotificaciones: function(criterio,funcionCallback){
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                let collection = db.collection('notificaciones');
+                collection.find(criterio).toArray(function(err, notificaciones) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(notificaciones);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
     // Modificamos una apuesta que se encuentre en la base
     modificarApuesta: function (criterio, apuesta, funcionCallback) {
     this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {

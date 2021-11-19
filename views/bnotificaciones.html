@@ -4,6 +4,7 @@
 
 
 <h2>Notificaciones</h2>
+<p>Las siguientes apuesta han sido cerradas</p>
 <div class="table-responsive">
     <table class="table table-hover">
 
@@ -14,8 +15,6 @@
             <th>Equipo local</th>
             <th>Equipo visitante</th>
             <th>Estado de la apuesta</th>
-            <th>Apostado a</th>
-            <th>Cantidad</th>
             {% if usuarioSesion.rol === 'admin'%}
             <th>Abrir/Cerrar</th>
 
@@ -41,31 +40,11 @@
             <td> Cerrada </td>
             {% endif %}
 
+            <td>{{apuesta.money}}</td>
 
-            <td>{{apuesta.apuesta_usuario.equipo}}</td>
-            <td>{{apuesta.apuesta_usuario.money}}</td>
-
-
-            {% if apuesta.estado === 'abierta' &&usuarioSesion.rol !== 'admin' && apuesta.apuesta_usuario.ganada%}
-            <td> Sin resultado</td>
-            {% elif apuesta.apuesta_usuario.cobrada %}
-            <td> Cobrada</td>
-            {% elif apuesta.apuesta_usuario.ganada && apuesta.estado==='cerrada'%}
-            <td><a href="/apuesta/cobrar/{{apuesta.apuesta_usuario._id.toString()}}">Cobrar apuesta</a></td>
-            {% elif !apuesta.apuesta_usuario.ganada && apuesta.estado==='cerrada'%}
-            <td> Perdida</td>
-
-            {% endif%}
-            {% if usuarioSesion.rol === 'admin' && apuesta.estado === 'abierta'%}
             <td>
-                <a id="btCerrarApuesta" href="/apuesta/cerrar/{{ apuesta._id.toString() }}">Cerrar</a> <br>
+                <a id="btApostar" href="/apuesta/ver/{{ apuesta._id.toString() }}">Ver</a> <br>
             </td>
-            {% elif usuarioSesion.rol%}
-            <td>
-                <a id="btApostar" href="/apuesta/apostar/{{ apuesta._id.toString() }}">Ver</a> <br>
-            </td>
-            {% endif %}
-            <td></td>
 
 
         </tr>
