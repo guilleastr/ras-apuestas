@@ -24,26 +24,26 @@
         </thead>
         <tbody>
         <!-- Inicio del Bloque oferta -->
-        {% for apuesta in apuestas %}
+        {% for evento in eventos %}
         <tr>
             <td></td>
-            <td>{{ apuesta.tipodep }}</td>
-            <td>{{ apuesta.local }} </td>
-            <td>{{ apuesta.visitante }} </td>
-            {% if usuarioSesion.rol === 'user'&& apuesta.estado === 'abierta'%}
+            <td>{{ evento.tipodep }}</td>
+            <td>{{ evento.local }} </td>
+            <td>{{ evento.visitante }} </td>
+            {% if usuarioSesion.rol === 'user'&& evento.estado === 'abierta'%}
             <td>Abierta</td>
-            {% elif usuarioSesion.rol === 'user' && apuesta.estado === 'suspendida'%}
+            {% elif usuarioSesion.rol === 'user' && evento.estado === 'suspendida'%}
             <td>
                 Suspendida
             </td>
-            {% elif usuarioSesion.rol === 'user' && apuesta.estado === 'cerrada'%}
+            {% elif usuarioSesion.rol === 'user' && evento.estado === 'cerrada'%}
             <td> Cerrada </td>
             {% endif %}
 
-            <td>{{apuesta.money}}</td>
+            <td>{{evento.money}}</td>
 
             <td>
-                <a id="btApostar" href="/apuesta/ver/{{ apuesta._id.toString() }}">Ver</a> <br>
+                <a id="btApostar" href="/apuesta/ver/{{ evento._id.toString() }}">Ver</a> <br>
             </td>
 
 

@@ -58,6 +58,24 @@ module.exports = {
         });
     },
     // Intersamos una apuesta a la base de datos
+    insertarEvento: function(apuesta, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                let collection = db.collection('eventos');
+                collection.insertOne(apuesta, function(err, result) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(result.ops[0]._id);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+    // Intersamos una apuesta de un usuario a la base de datos
     insertarApuesta: function(apuesta, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
@@ -75,31 +93,13 @@ module.exports = {
             }
         });
     },
-    // Intersamos una apuesta de un usuario a la base de datos
-    insertarApuestaUsuario: function(apuesta, funcionCallback) {
-        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
-            if (err) {
-                funcionCallback(null);
-            } else {
-                let collection = db.collection('apuestas_usuarios');
-                collection.insertOne(apuesta, function(err, result) {
-                    if (err) {
-                        funcionCallback(null);
-                    } else {
-                        funcionCallback(result.ops[0]._id);
-                    }
-                    db.close();
-                });
-            }
-        });
-    },
     // Recuperamos las apuestas de la base de datos
-    obtenerApuestasUsuario : function(criterio,funcionCallback){
+    obtenerApuestas : function(criterio,funcionCallback){
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
                 funcionCallback(null);
             } else {
-                let collection = db.collection('apuestas_usuarios');
+                let collection = db.collection('apuestas');
                 collection.find(criterio).toArray(function(err, apuestas) {
                     if (err) {
                         funcionCallback(null);
@@ -111,12 +111,12 @@ module.exports = {
             }
         });
     },
-    actualizarApuestasUsuario: function (criterio, usuario, funcionCallback) {
+    actualizarApuestas: function (criterio, usuario, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
             if (err) {
                 funcionCallback(null);
             } else {
-                let collection = db.collection('apuestas_usuarios');
+                let collection = db.collection('apuestas');
                 collection.findOneAndUpdate(criterio,usuario, function (err, result) {
 
                     funcionCallback(result);
@@ -127,12 +127,12 @@ module.exports = {
         });
     },
     // Recuperamos las apuestas de la base de datos
-    obtenerApuestas : function(criterio,funcionCallback){
+    obtenerEventos : function(criterio,funcionCallback){
             this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
                 if (err) {
                     funcionCallback(null);
                 } else {
-                    let collection = db.collection('apuestas');
+                    let collection = db.collection('eventos');
                     collection.find(criterio).toArray(function(err, apuestas) {
                         if (err) {
                             funcionCallback(null);
@@ -179,12 +179,12 @@ module.exports = {
         });
     },
     // Modificamos una apuesta que se encuentre en la base
-    modificarApuesta: function (criterio, apuesta, funcionCallback) {
+    modificarEvento: function (criterio, apuesta, funcionCallback) {
     this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
         if (err) {
             funcionCallback(null);
         } else {
-            let collection = db.collection('apuestas');
+            let collection = db.collection('eventos');
             collection.update(criterio, {$set: apuesta}, function (err, result) {
                 if (err) {
                     funcionCallback(null);

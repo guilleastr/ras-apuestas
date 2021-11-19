@@ -49,7 +49,7 @@ module.exports = function (app, swig, gestorBD) {
                             res.redirect("/registrarse?mensaje=Error al registrar al usuario");
                         } else {
                             req.session.usuario = usuario;
-                            res.redirect("/apuesta/list");
+                            res.redirect("/evento/list");
                         }
                     });
                 }
@@ -89,9 +89,9 @@ module.exports = function (app, swig, gestorBD) {
             } else {
                 req.session.usuario = usuarios[0];
                 if (req.session.usuario.rol == "admin") {
-                    res.redirect("/apuesta/list");
+                    res.redirect("/evento/list");
                 } else {
-                    res.redirect("/apuesta/list");
+                    res.redirect("/evento/list");
 
                 }
             }

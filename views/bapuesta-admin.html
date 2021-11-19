@@ -57,7 +57,7 @@
             <h3> Equipo visitante : {{apuesta.visitante}} </h3>
             <p>Cuota:  {{apuesta.cuotavisitante}}
                 {%if apuesta.estado==="abierta"%}
-            <form  method="post" action="/apuesta/cerrar/{{apuesta._id.toString()}}?equipo=visitante">
+            <form  method="post" action="/evento/cerrar/{{apuesta._id.toString()}}?equipo=visitante">
                 <input type="submit" value="Gana visitante" />
             </form>
             {%endif%}
@@ -68,7 +68,7 @@
             <h3>Empate </h3>
             <p>Cuota: {{apuesta.cuotaempate}}
                 {%if apuesta.estado==="abierta"%}
-            <form method="post" action="/apuesta/cerrar/{{apuesta._id.toString()}}?equipo=empate">
+            <form method="post" action="/evento/cerrar/{{apuesta._id.toString()}}?equipo=empate">
                 <input type="submit" value="Gana empate" />
             </form>
             {%endif%}
@@ -78,7 +78,7 @@
             <h3> Equipo local: {{apuesta.local}}</h3>
             <p>Cuota: {{apuesta.cuotalocal}}
                 {%if apuesta.estado==="abierta"%}
-            <form method="post" action="/apuesta/cerrar/{{apuesta._id.toString()}}?equipo=local">
+            <form method="post" action="/evento/cerrar/{{apuesta._id.toString()}}?equipo=local">
                 <input type="submit" value="Gana local" />
             </form>
             {%endif%}

@@ -31,15 +31,15 @@
             {% elif usuarioSesion.rol !== "admin" %}
             <ul class="nav navbar-nav">
                 <li><strong><p style="margin-top: 16px; color: white" id="title">RAS-BET</p></strong></li>
-                <li id="buscarapuestas"><a href="/apuesta/list">Ver apuestas</a></li>
+                <li id="buscarapuestas"><a href="/evento/list">Ver eventos</a></li>
                 <li id="misapuestas"><a href="/apuesta/misapuestas">Mis Apuestas</a></li>
                 <li id="notificaciones"><a href="/apuesta/notificaciones">Notificaciones</a></li>
             </ul>
             {% elif usuarioSesion.rol === "admin" %}
             <ul class="nav navbar-nav">
                 <li id="listarusuarios"><a href="/usuario/list">Listar usuarios</a></li>
-                <li id="listarapuestas"><a href="/apuesta/list">Listar apuestas</a></li>
-                <li id="crearapuestas"><a href="/apuesta/agregar">Crear apuestas</a></li>
+                <li id="listarapuestas"><a href="/evento/list">Listar apuestas</a></li>
+                <li id="crearapuestas"><a href="/evento/agregar">Crear apuestas</a></li>
             </ul>
             {% endif%}
             <ul class="nav navbar-nav navbar-right">

@@ -26,45 +26,45 @@
         </thead>
         <tbody>
         <!-- Inicio del Bloque oferta -->
-        {% for apuesta in apuestas %}
+        {% for evento in eventos %}
         <tr>
             <td></td>
-            <td>{{ apuesta.tipodep }}</td>
-            <td>{{ apuesta.local }} </td>
-            <td>{{ apuesta.visitante }} </td>
-            {% if usuarioSesion.rol === 'user'&& apuesta.estado === 'abierta'%}
+            <td>{{ evento.tipodep }}</td>
+            <td>{{ evento.local }} </td>
+            <td>{{ evento.visitante }} </td>
+            {% if usuarioSesion.rol === 'user'&& evento.estado === 'abierta'%}
                 <td>Abierta</td>
-            {% elif usuarioSesion.rol === 'user' && apuesta.estado === 'suspendida'%}
+            {% elif usuarioSesion.rol === 'user' && evento.estado === 'suspendida'%}
             <td>
                 Suspendida
             </td>
-            {% elif usuarioSesion.rol === 'user' && apuesta.estado === 'cerrada'%}
+            {% elif usuarioSesion.rol === 'user' && evento.estado === 'cerrada'%}
             <td> Cerrada </td>
             {% endif %}
 
 
-            <td>{{apuesta.apuesta_usuario.equipo}}</td>
-            <td>{{apuesta.apuesta_usuario.money}}</td>
-            <td>{{apuesta.apuesta_usuario.cuota}}</td>
+            <td>{{evento.apuesta.equipo}}</td>
+            <td>{{evento.apuesta.money}}</td>
+            <td>{{evento.apuesta.cuota}}</td>
 
 
-            {% if apuesta.estado === 'abierta' &&usuarioSesion.rol !== 'admin'%}
+            {% if evento.estado === 'abierta' &&usuarioSesion.rol !== 'admin'%}
                 <td> Sin resultado</td>
-            {% elif apuesta.apuesta_usuario.cobrada %}
+            {% elif evento.apuesta.cobrada %}
             <td> Cobrada</td>
-            {% elif apuesta.apuesta_usuario.ganada && apuesta.estado==='cerrada'%}
-                <td><a href="/apuesta/cobrar/{{apuesta.apuesta_usuario._id.toString()}}">Cobrar apuesta</a></td>
-            {% elif !apuesta.apuesta_usuario.ganada && apuesta.estado==='cerrada'%}
+            {% elif evento.apuesta.ganada && evento.estado==='cerrada'%}
+                <td><a href="/apuesta/cobrar/{{evento.apuesta._id.toString()}}">Cobrar apuesta</a></td>
+            {% elif !evento.apuesta.ganada && evento.estado==='cerrada'%}
                 <td> Perdida</td>
 
             {% endif%}
-            {% if usuarioSesion.rol === 'admin' && apuesta.estado === 'abierta'%}
+            {% if usuarioSesion.rol === 'admin' && evento.estado === 'abierta'%}
             <td>
-                <a id="btCerrarApuesta" href="/apuesta/cerrar/{{ apuesta._id.toString() }}">Cerrar</a> <br>
+                <a id="btCerrarApuesta" href="/apuesta/cerrar/{{ evento._id.toString() }}">Cerrar</a> <br>
             </td>
             {% elif usuarioSesion.rol%}
             <td>
-                <a id="btApostar" href="/apuesta/ver/{{ apuesta._id.toString() }}">Ver</a> <br>
+                <a id="btApostar" href="/apuesta/ver/{{ evento._id.toString() }}">Ver</a> <br>
             </td>
             {% endif %}
             <td></td>

@@ -1,6 +1,6 @@
 module.exports = function (app, swig, gestorBD) {
-    app.get('/apuesta/agregar', function (req, res) {
-        let respuesta = swig.renderFile('views/bagregarapuesta.html', {
+    app.get('/evento/agregar', function (req, res) {
+        let respuesta = swig.renderFile('views/bagregarevento.html', {
             usuarioSesion: req.session.usuario
         });
         res.send(respuesta);
@@ -8,7 +8,7 @@ module.exports = function (app, swig, gestorBD) {
 
 
     // Agregar una nueva apuesta
-    app.post("/apuesta/agregar", function (req, res) {
+    app.post("/evento/agregar", function (req, res) {
         //Comprobamos todos los posibles errores al agregar una apuesta
         if (req.session.usuario == null) {
             res.redirect("/identificarse");
@@ -27,7 +27,7 @@ module.exports = function (app, swig, gestorBD) {
         }
         // En caso de que no haya errores procedemos a añadirla, guardando todos lo necesario
         let now = new Date();
-        var apuesta = {
+        var evento = {
             local: req.body.local,
             visitante: req.body.visit,
             cuotalocal: req.body.cuotalocal,
@@ -39,11 +39,11 @@ module.exports = function (app, swig, gestorBD) {
         }
 
         // Conectarse a la base de datos e insertarla
-        gestorBD.insertarApuesta(apuesta, function (id) {
+        gestorBD.insertarEvento(evento, function (id) {
             if (id == null) {
-                res.send("Error al insertar apuesta");
+                res.send("Error al insertar evento");
             } else {
-                res.redirect("/apuesta/list");
+                res.redirect("/evento/list");
             }
         });
 
@@ -51,14 +51,14 @@ module.exports = function (app, swig, gestorBD) {
 
 
 
-    app.get("/apuesta/list", function (req, res) {
+    app.get("/evento/list", function (req, res) {
         let usuarioSesion = req.session.usuario;
         if (usuarioSesion == null) {
             res.redirect("/identificarse");
             return;
         } else {
             let criterio = null;
-            gestorBD.obtenerApuestas(criterio, function (apuestas) {
+            gestorBD.obtenerEventos(criterio, function (apuestas) {
                 if (apuestas == null) {
                     res.send("Error al listar");
                 } else {
@@ -74,12 +74,12 @@ module.exports = function (app, swig, gestorBD) {
         }
     });
 
-    app.get('/apuesta/cerrar/:id', function (req, res) {
+    app.get('/evento/cerrar/:id', function (req, res) {
         let criterio = {"_id": gestorBD.mongo.ObjectID(req.params.id)};
         //FALTA POR HACER
-        gestorBD.obtenerApuestas(criterio, function (apuestas) {
+        gestorBD.obtenerEventos(criterio, function (apuestas) {
             if (apuestas == null || apuestas.length == 0 || apuestas[0].estado == "cerrada") {
-                res.redirect("/apuesta/list?mensaje=La apuesta no existe o no está disponible")
+                res.redirect("/evento/list?mensaje=La apuesta no existe o no está disponible")
             } else {
                 let respuesta = swig.renderFile('views/bapuesta-admin.html', {
                     usuarioSesion: req.session.usuario,
@@ -90,14 +90,14 @@ module.exports = function (app, swig, gestorBD) {
         })
     });
 
-    app.post("/apuesta/cerrar/:id", function (req, res) {
+    app.post("/evento/cerrar/:id", function (req, res) {
         let criterio = {"_id": gestorBD.mongo.ObjectID(req.params.id)};
         let ganador = req.query.equipo;
-        gestorBD.obtenerApuestas(criterio, function (apuestas) {
+        gestorBD.obtenerEventos(criterio, function (apuestas) {
             if (apuestas == null) {
                 res.send(respuesta);
             } else {
-                var apuesta = {
+                var evento = {
                     local: apuestas[0].local,
                     visitante: apuestas[0].visitante,
                     cuotalocal: apuestas[0].cuotalocal,
@@ -107,13 +107,13 @@ module.exports = function (app, swig, gestorBD) {
                     fecha: apuestas[0].fecha,
                     estado: 'cerrada'
                 }
-                gestorBD.modificarApuesta(criterio, apuesta, function (result) {
+                gestorBD.modificarEvento(criterio, evento, function (result) {
                     if (result == null) {
                         res.send("Error al modificar la apuesta");
                     } else {
 
                         let criterio_apuesta_update = {
-                            apuesta: gestorBD.mongo.ObjectId(req.params.id),
+                            evento: gestorBD.mongo.ObjectId(req.params.id),
                             equipo: ganador
                         }
 
@@ -123,20 +123,20 @@ module.exports = function (app, swig, gestorBD) {
                             }
                         }
 
-                        gestorBD.actualizarApuestasUsuario(criterio_apuesta_update, apuesta, function (result) {
+                        gestorBD.actualizarApuestas(criterio_apuesta_update, apuesta, function (result) {
                             let criterio_apuesta = {
-                                apuesta: gestorBD.mongo.ObjectId(req.params.id)
+                                evento: gestorBD.mongo.ObjectId(req.params.id)
                             }
 
-                            gestorBD.obtenerApuestasUsuario(criterio_apuesta, function (apuestas_usuarios) {
-                                if (apuestas_usuarios == null) {
-                                    res.redirect("/apuestas/list?mensaje=Error cerrando la apuesta")
+                            gestorBD.obtenerApuestas(criterio_apuesta, function (apuestas) {
+                                if (apuestas == null) {
+                                    res.redirect("/evento/list?mensaje=Error cerrando la apuesta")
                                 } else {
                                     let list = []
-                                    for (let i = 0; i < apuestas_usuarios.length; i++) {
+                                    for (let i = 0; i < apuestas.length; i++) {
                                         let notificacion = {
-                                            usuario: apuestas_usuarios[i].usuario,
-                                            apuesta: gestorBD.mongo.ObjectId(req.params.id)
+                                            usuario: apuestas[i].usuario,
+                                            evento: gestorBD.mongo.ObjectId(req.params.id)
                                         }
                                         list.push(notificacion)
 
@@ -146,7 +146,7 @@ module.exports = function (app, swig, gestorBD) {
                                         if (id === null) {
                                             console.log("Error enviando notificación)")
                                         } else {
-                                            res.redirect("/apuesta/list?mensaje=Apuesta cerrada");
+                                            res.redirect("/evento/list?mensaje=Apuesta cerrada");
                                         }
                                     })
 
@@ -166,23 +166,23 @@ module.exports = function (app, swig, gestorBD) {
     app.get("/apuesta/misapuestas", function (req, res) {
         let criterio = {usuario: gestorBD.mongo.ObjectId(req.session.usuario._id)}
 
-        gestorBD.obtenerApuestasUsuario(criterio, function (apuestas_usuario) {
-            if (apuestas_usuario == null) {
+        gestorBD.obtenerApuestas(criterio, function (apuestas) {
+            if (apuestas == null) {
 
             } else {
                 let list = []
-                for (let i = 0; i < apuestas_usuario.length; i++) {
-                    list.push(apuestas_usuario[i].apuesta)
+                for (let i = 0; i < apuestas.length; i++) {
+                    list.push(apuestas[i].evento)
                 }
                 criterio = {"_id": {"$in": list}}
-                gestorBD.obtenerApuestas(criterio, function (apuestas) {
-                    if (apuestas == null) {
+                gestorBD.obtenerEventos(criterio, function (eventos) {
+                    if (eventos == null) {
 
                     } else {
-                        for (let i = 0; i < apuestas.length; i++) {
-                            for (let j = 0; j < apuestas_usuario.length; j++) {
-                                if (apuestas[i]._id.toString() == apuestas_usuario[i].apuesta.toString()) {
-                                    apuestas[i].apuesta_usuario = apuestas_usuario[i];
+                        for (let i = 0; i < eventos.length; i++) {
+                            for (let j = 0; j < eventos.length; j++) {
+                                if (eventos[i]._id.toString() == apuestas[i].evento.toString()) {
+                                    eventos[i].apuesta = apuestas[i];
 
                                 }
                             }
@@ -191,7 +191,7 @@ module.exports = function (app, swig, gestorBD) {
 
                         let respuesta = swig.renderFile('views/bapuestas_propias.html', {
                             usuarioSesion: req.session.usuario,
-                            apuestas: apuestas
+                            eventos: eventos
                         });
                         res.send(respuesta);
                     }
@@ -204,20 +204,20 @@ module.exports = function (app, swig, gestorBD) {
         let criterio = {"_id": gestorBD.mongo.ObjectID(req.params.id)};
         //FALTA POR HACER
         let criterio_apuesta={
-            apuesta:gestorBD.mongo.ObjectId(req.params.id),
+            evento:gestorBD.mongo.ObjectId(req.params.id),
             usuario:gestorBD.mongo.ObjectId(req.session.usuario._id)
         }
 
-        gestorBD.obtenerApuestasUsuario(criterio_apuesta, function (apuestas_usuario){
-            if(apuestas_usuario==null){
-                res.redirect("/apuesta/list?mensaje=La apuesta no existe o no está disponible")
+        gestorBD.obtenerApuestas(criterio_apuesta, function (apuestas){
+            if(apuestas==null){
+                res.redirect("/evento/list?mensaje=La apuesta no existe o no está disponible")
             }else{
-                if(apuestas_usuario.length>0){
-                    res.redirect("/apuesta/list?mensaje=No se pueden realizar dos apuestas en el mismo evento")
+                if(apuestas.length>0){
+                    res.redirect("/evento/list?mensaje=No se pueden realizar dos apuestas en el mismo evento")
                 }else{
-                    gestorBD.obtenerApuestas(criterio, function (apuestas) {
+                    gestorBD.obtenerEventos(criterio, function (apuestas) {
                         if (apuestas == null || apuestas.length == 0 || apuestas[0].estado == "cerrada") {
-                            res.redirect("/apuesta/list?mensaje=La apuesta no existe o no está disponible")
+                            res.redirect("/evento/list?mensaje=La apuesta no existe o no está disponible")
                         } else {
                             let respuesta = swig.renderFile('views/bapuesta.html', {
                                 usuarioSesion: req.session.usuario,
@@ -234,7 +234,7 @@ module.exports = function (app, swig, gestorBD) {
 
     app.post("/apuesta/apostar/:id", function (req, res) {
         var apuesta = {
-            apuesta: gestorBD.mongo.ObjectID(req.params.id),
+            evento: gestorBD.mongo.ObjectID(req.params.id),
             equipo: req.query.equipo,
             money: req.body.money,
             usuario: gestorBD.mongo.ObjectID(req.session.usuario._id),
@@ -252,7 +252,7 @@ module.exports = function (app, swig, gestorBD) {
                 let criterio_apuesta = {
                     _id: gestorBD.mongo.ObjectID(req.params.id)
                 }
-                gestorBD.obtenerApuestas(criterio_apuesta, function (apuestas) {
+                gestorBD.obtenerEventos(criterio_apuesta, function (apuestas) {
                     if (apuestas == null) {
                         res.redirect("/apuesta/apostar/" + req.params.id + "?mensaje=Error al realizar la apuesta")
                     } else {
@@ -273,7 +273,7 @@ module.exports = function (app, swig, gestorBD) {
                                 } else {
                                     apuesta.cuota = apuestas[0].cuotaempate
                                 }
-                                gestorBD.insertarApuestaUsuario(apuesta, function (apuesta) {
+                                gestorBD.insertarApuesta(apuesta, function (apuesta) {
                                     if (apuesta == null) {
                                         res.redirect("/apuesta/apostar/" + req.params.id + "?mensaje=Error al realizar la apuesta")
                                     } else {
@@ -303,11 +303,11 @@ module.exports = function (app, swig, gestorBD) {
         let criterio = {
             _id: gestorBD.mongo.ObjectID(req.params.id)
         }
-        gestorBD.obtenerApuestasUsuario(criterio, function (apuestas_usuario) {
+        gestorBD.obtenerApuestas(criterio, function (apuestas_usuario) {
             if (apuestas_usuario == null) {
 
             } else if (apuestas_usuario.length > 1 || apuestas_usuario.length == 0) {
-                res.redirect("/apuestas/misapuestas?mensaje=Error al cobrar la apuesta")
+                res.redirect("/apuesta/misapuestas?mensaje=Error al cobrar la apuesta")
             } else {
                 let usuario_id = gestorBD.mongo.ObjectId(req.session.usuario._id)
                 if (apuestas_usuario[0].usuario.toString() === usuario_id.toString() && !apuestas_usuario[0].cobrada) {
@@ -326,7 +326,7 @@ module.exports = function (app, swig, gestorBD) {
 
                         let apuesta = apuestas_usuario[0]
                         apuesta.cobrada = true
-                        gestorBD.actualizarApuestasUsuario(criterio, apuesta, function (apuesta) {
+                        gestorBD.actualizarApuestas(criterio, apuesta, function (apuesta) {
 
                             res.redirect("/apuesta/misapuestas?mensaje=Apuesta cobrada");
                         })
@@ -341,9 +341,9 @@ module.exports = function (app, swig, gestorBD) {
 
     app.get("/apuesta/ver/:id", function(req,res){
         let criterio = {"_id": gestorBD.mongo.ObjectID(req.params.id)};
-        gestorBD.obtenerApuestas(criterio, function (apuestas) {
+        gestorBD.obtenerEventos(criterio, function (apuestas) {
             if (apuestas == null ) {
-                res.redirect("/apuesta/list?mensaje=La apuesta no existe o no está disponible")
+                res.redirect("/evento/list?mensaje=La apuesta no existe o no está disponible")
             } else {
                 let respuesta = swig.renderFile('views/bapuesta-view.html', {
                     usuarioSesion: req.session.usuario,
@@ -361,22 +361,21 @@ module.exports = function (app, swig, gestorBD) {
 
         gestorBD.obtenerNotificaciones(criterio, function (notificaciones) {
             if (notificaciones == null) {
-                res.redirect("apuestas/list?mensaje=error al leer las notificaciones")
+                res.redirect("/evento/list?mensaje=error al leer las notificaciones")
             }
             let list = []
             for (let i = 0; i < notificaciones.length; i++) {
-                list.push(notificaciones[i].apuesta)
+                list.push(notificaciones[i].evento)
             }
 
             criterio = {"_id": {"$in": list}}
-            let a=notificaciones[0].apuesta.toString()
-            gestorBD.obtenerApuestas(criterio, function (apuestas) {
-                if (apuestas == null) {
-                    res.redirect("apuestas/list?mensaje=error al leer las notificaciones")
+            gestorBD.obtenerEventos(criterio, function (eventos) {
+                if (eventos == null) {
+                    res.redirect("/evento/list?mensaje=error al leer las notificaciones")
                 } else {
                     let respuesta = swig.renderFile('views/bnotificaciones.html', {
                         usuarioSesion: req.session.usuario,
-                        apuestas: apuestas
+                        eventos: eventos
                     });
                     res.send(respuesta);
                 }
@@ -401,7 +400,7 @@ module.exports = function (app, swig, gestorBD) {
                 ]
             };
         }
-        gestorBD.obtenerApuestas(criterio, function (apuestas) {
+        gestorBD.obtenerEventos(criterio, function (apuestas) {
             if (apuestas == null) {
                 res.send("Error al listar");
             } else {
