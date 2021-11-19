@@ -56,7 +56,7 @@
         <div class="column">
             <h3> Equipo visitante : {{apuesta.visitante}} </h3>
 
-            <p>Cuota:  {{apuesta.cuotavisitante}}
+            <p><strong>Cuota:  {{apuesta.cuotavisitante}}</strong>
                 {%if apuesta.estado==="abierta"%}
             <form  method="post" action="/apuesta/apostar/{{apuesta._id.toString()}}?equipo=visitante">
             Cuantía a apostar
@@ -73,7 +73,8 @@
         </div>
         <div class="column">
             <h3>Empate </h3>
-                <p>Cuota: {{apuesta.cuotaempate}}
+
+                <p><strong>Cuota: {{apuesta.cuotaempate}}</strong>
                 {%if apuesta.estado==="abierta"%}
                 <form method="post" action="/apuesta/apostar/{{apuesta._id.toString()}}?equipo=empate">
 
@@ -89,7 +90,7 @@
         </div>
         <div class="column">
             <h3> Equipo local: {{apuesta.local}}</h3>
-            <p>Cuota: {{apuesta.cuotalocal}}
+            <p><strong>Cuota: {{apuesta.cuotalocal}}</strong>
                 {%if apuesta.estado==="abierta"%}
                 <form method="post" action="/apuesta/apostar/{{apuesta._id.toString()}}?equipo=local">
             Cuantía a apostar
