@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1a999f6e-0712-4ea4-90fd-2bda813ad806" name="Default Changelist" comment="inicio sesion + logo">
-      <change beforePath="$PROJECT_DIR$/doc/Documentacion-Ras-Bet.vpp" beforeDir="false" afterPath="$PROJECT_DIR$/doc/Documentacion-Ras-Bet.vpp" afterDir="false" />
-    </list>
+    <list default="true" id="1a999f6e-0712-4ea4-90fd-2bda813ad806" name="Default Changelist" comment="inicio sesion + logo" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -137,14 +135,7 @@
       <option name="project" value="LOCAL" />
       <updated>1637343663968</updated>
     </task>
-    <task id="LOCAL-00008" summary="Actualizado diagrama de clases">
-      <created>1637344086495</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1637344086495</updated>
-    </task>
-    <option name="localTasksCounter" value="9" />
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,8 +161,7 @@
     <MESSAGE value="Notificaciones&#10;Vista extra de la Apuesta" />
     <MESSAGE value="Cambios estéticos" />
     <MESSAGE value="Más cambios y ajustes" />
-    <MESSAGE value="Actualizado diagrama de clases" />
-    <option name="LAST_COMMIT_MESSAGE" value="Actualizado diagrama de clases" />
+    <option name="LAST_COMMIT_MESSAGE" value="Más cambios y ajustes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
