@@ -111,6 +111,21 @@ module.exports = {
             }
         });
     },
+    actualizarApuestaUsuario: function (criterio, usuario, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                let collection = db.collection('apuestas_usuarios');
+                collection.findOneAndUpdate(criterio,usuario, function (err, result) {
+
+                    funcionCallback(null);
+
+                    db.close();
+                });
+            }
+        });
+    },
     // Recuperamos las apuestas de la base de datos
     obtenerApuestas : function(criterio,funcionCallback){
             this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {

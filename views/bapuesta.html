@@ -4,17 +4,36 @@
 
 {% block contenido_principal %}
 <style>
+
     .column {
         float: left;
-        width: 50%;
+        width: 29%;
+        border-radius: 10px;
+        background: lightcyan;
+        margin: 23px;
+        padding: 5px;
+    }
+    .bet{
+        border-radius: 10px;
+        background: lightblue;
+        margin: 23px;
+        padding: 20px;
     }
 
-    /* Clear floats after the columns */
     .row:after {
         content: "";
         display: table;
         clear: both;
     }
+
+    .child {
+        width: 30%;
+    }
+
+    .text_important{
+        font-size: 20px;
+    }
+
     h2{
         alignment: center;
     }
@@ -22,38 +41,70 @@
     button{
         alignment: right;
     }
+    input{
+        alignment: right;
+    }
 </style>
+
+<div class="bet">
 <h2>Apostar</h2>
 
-<p><strong>Categoría: {{apuesta.tipodep}}</strong></p>
-<p>Fecha{{apuesta.fecha}}</p>
+<p class="text_important"><strong>Categoría: {{apuesta.tipodep}}</strong></p>
+<p class="text_important">Fecha: {{apuesta.fecha}}</p>
 
-<div class="row">
-    <div class="column">
-        <h3> Equipo visitante : {{apuesta.visitante}} </h3>
+    <div class="row">
+        <div class="column">
+            <h3> Equipo visitante : {{apuesta.visitante}} </h3>
 
-        <p>Cuota:  {{apuesta.cuotavisitante}}
-        <form  method="post" action="/apuesta/apostar/{{apuesta._id.toString()}}?equipo=visitante">
-            <input id="money" type="number" class="form-control" name="money" placeholder="Dinero a apostar: ej 2.50" required="true" />
-            <input type="submit" value="Apostar visitante" />
+            <p>Cuota:  {{apuesta.cuotavisitante}}
+                {%if apuesta.estado==="abierta"%}
+            <form  method="post" action="/apuesta/apostar/{{apuesta._id.toString()}}?equipo=visitante">
+            Cuantía a apostar
+                <div class="child">
 
-        </form>
-        </p>
+                    <input id="money" type="number" class="form-control" name="money" placeholder="Ej: 2.50" required="true" />
+                </div>
 
-    </div>
-    <div class="column">
-        <h3> Equipo local: {{apuesta.local}}</h3>
-        <p>Cuota: {{apuesta.cuotalocal}}
-            <form method="post" action="/apuesta/apostar/{{apuesta._id.toString()}}?equipo=local">
-                <input id="money" type="number" class="form-control" name="money" placeholder="Dinero a apostar: ej 2.50" required="true" />
-
-                <input type="submit" value="Apostar local" />
-
+                <input type="submit" value="Apostar visitante" />
             </form>
-        </p>
-    </div>
-</div>
+            {%endif%}
+            </p>
 
+        </div>
+        <div class="column">
+            <h3>Empate </h3>
+                <p>Cuota: {{apuesta.cuotaempate}}
+                {%if apuesta.estado==="abierta"%}
+                <form method="post" action="/apuesta/apostar/{{apuesta._id.toString()}}?equipo=empate">
+
+            Cuantía a apostar
+                    <div class="child">
+                        <input id="money" type="number" class="form-control" name="money" placeholder="Ej: 2.50" required="true" />
+                    </div>
+                    <input type="submit" value="Apostar empate" />
+
+                </form>
+            {%endif%}
+            </p>
+        </div>
+        <div class="column">
+            <h3> Equipo local: {{apuesta.local}}</h3>
+            <p>Cuota: {{apuesta.cuotalocal}}
+                {%if apuesta.estado==="abierta"%}
+                <form method="post" action="/apuesta/apostar/{{apuesta._id.toString()}}?equipo=local">
+            Cuantía a apostar
+                    <div class="child">
+                        <input id="money" type="number" class="form-control" name="money" placeholder="Ej: 2.50" required="true" />
+                    </div>
+                    <input type="submit" value="Apostar local" />
+
+                </form>
+            {%endif%}
+            </p>
+        </div>
+    </div>
+
+</div>
 
 
 

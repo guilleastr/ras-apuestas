@@ -43,10 +43,23 @@ var routerUsuarioSession = express.Router();
 
 routerUsuarioSession.use(function(req, res, next) {
     console.log("routerUsuarioSession");
-    let criterio;
+
     if ( req.session.usuario ) {
-        // dejamos correr la petición
-        next();
+        let criterio={
+            _id:gestorBD.mongo.ObjectId(req.session.usuario._id)
+        }
+        gestorBD.obtenerUsuarios(criterio, function (usuarios){
+            if(usuarios==null||usuarios.length==0){
+                console.log("fatal error")
+            }
+            else{
+                req.session.usuario=usuarios[0]
+                req.session.usuario._id=req.session.usuario._id.toString()
+                next();
+            }
+
+        })
+
     } else {
         res.redirect("/identificarse");
     }

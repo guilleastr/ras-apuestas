@@ -35,21 +35,27 @@
             <td>{{ apuesta.cuotalocal }} </td>
             <td>{{ apuesta.cuotavisitante }} </td>
             <td>{{ apuesta.cuotaempate }} </td>
-            {% if apuesta.estado === 'disponible'%}
+            {% if apuesta.estado === 'abierta'%}
             <td>Abierta</td>
-            {% else %}
+            {% elif apuesta.estado === 'cerrada'%}
             <td>Cerrada</td>
+            {% elif apuesta.estado === 'suspendida'%}
+            <td>Suspendida</td>
             {% endif %}
-            {% if usuarioSesion.rol === 'admin' && apuesta.estado === 'disponible'%}
+            {% if usuarioSesion.rol === 'admin' && apuesta.estado === 'abierta'%}
             <td>
                 <a id="btCerrarApuesta" href="/apuesta/cerrar/{{ apuesta._id.toString() }}">Cerrar</a> <br>
             </td>
-            {% elif usuarioSesion.rol === 'user' && apuesta.estado === 'disponible'%}
+            {% elif usuarioSesion.rol === 'user' && apuesta.estado === 'abierta'%}
             <td>
                 <a id="btApostar" href="/apuesta/apostar/{{ apuesta._id.toString() }}">APOSTAR</a> <br>
             </td>
-            {% elif usuarioSesion.rol === 'user' && apuesta.estado === 'no disponible'%}
-            <td> APUESTA CERRADA </td>
+            {% elif usuarioSesion.rol === 'user' && apuesta.estado === 'suspendida'%}
+            <td>
+               Suspendida
+            </td>
+            {% elif usuarioSesion.rol === 'user' && apuesta.estado === 'cerrada'%}
+            <td> Cerrada </td>
             {% endif %}
             <td></td>
 

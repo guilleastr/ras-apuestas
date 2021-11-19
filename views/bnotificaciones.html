@@ -3,7 +3,7 @@
 {% block contenido_principal %}
 
 
-<h2>Mis apuestas</h2>
+<h2>Notificaciones</h2>
 <div class="table-responsive">
     <table class="table table-hover">
 
@@ -16,7 +16,6 @@
             <th>Estado de la apuesta</th>
             <th>Apostado a</th>
             <th>Cantidad</th>
-            <th>Cuota de Victoria</th>
             {% if usuarioSesion.rol === 'admin'%}
             <th>Abrir/Cerrar</th>
 
@@ -33,7 +32,7 @@
             <td>{{ apuesta.local }} </td>
             <td>{{ apuesta.visitante }} </td>
             {% if usuarioSesion.rol === 'user'&& apuesta.estado === 'abierta'%}
-                <td>Abierta</td>
+            <td>Abierta</td>
             {% elif usuarioSesion.rol === 'user' && apuesta.estado === 'suspendida'%}
             <td>
                 Suspendida
@@ -45,17 +44,16 @@
 
             <td>{{apuesta.apuesta_usuario.equipo}}</td>
             <td>{{apuesta.apuesta_usuario.money}}</td>
-            <td>{{apuesta.apuesta_usuario.cuota}}</td>
 
 
-            {% if apuesta.estado === 'abierta' &&usuarioSesion.rol !== 'admin' && !apuesta.apuesta_usuario.ganada%}
-                <td> Sin resultado</td>
+            {% if apuesta.estado === 'abierta' &&usuarioSesion.rol !== 'admin' && apuesta.apuesta_usuario.ganada%}
+            <td> Sin resultado</td>
             {% elif apuesta.apuesta_usuario.cobrada %}
             <td> Cobrada</td>
             {% elif apuesta.apuesta_usuario.ganada && apuesta.estado==='cerrada'%}
-                <td><a href="/apuesta/cobrar/{{apuesta.apuesta_usuario._id.toString()}}">Cobrar apuesta</a></td>
+            <td><a href="/apuesta/cobrar/{{apuesta.apuesta_usuario._id.toString()}}">Cobrar apuesta</a></td>
             {% elif !apuesta.apuesta_usuario.ganada && apuesta.estado==='cerrada'%}
-                <td> Perdida</td>
+            <td> Perdida</td>
 
             {% endif%}
             {% if usuarioSesion.rol === 'admin' && apuesta.estado === 'abierta'%}
