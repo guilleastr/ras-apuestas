@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1a999f6e-0712-4ea4-90fd-2bda813ad806" name="Default Changelist" comment="inicio sesion + logo" />
+    <list default="true" id="1a999f6e-0712-4ea4-90fd-2bda813ad806" name="Default Changelist" comment="inicio sesion + logo">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/rapuestas.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/rapuestas.js" afterDir="false" />
+
+      <change beforePath="$PROJECT_DIR$/views/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/base.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -168,12 +173,15 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
+
           <line>321</line>
           <properties lambdaOrdinal="-1" />
+
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
+
           <line>326</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="70" />
