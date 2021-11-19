@@ -133,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637342565947</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Más cambios y ajustes">
+      <created>1637343663968</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1637343663968</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,7 +165,8 @@
     <MESSAGE value="Notificaciones (sin mostrar todavía)&#10;&#10;Ganar apuesta" />
     <MESSAGE value="Notificaciones&#10;Vista extra de la Apuesta" />
     <MESSAGE value="Cambios estéticos" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cambios estéticos" />
+    <MESSAGE value="Más cambios y ajustes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Más cambios y ajustes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
