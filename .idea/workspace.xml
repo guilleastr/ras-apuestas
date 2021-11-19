@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1a999f6e-0712-4ea4-90fd-2bda813ad806" name="Default Changelist" comment="inicio sesion + logo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/rapuestas.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/rapuestas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/bagregarapuesta.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/bagregarapuesta.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -127,7 +125,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637340462977</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Cambios estéticos">
+      <created>1637342565947</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1637342565947</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,40 +156,35 @@
     <MESSAGE value="Apostar corregido&#10;Incluye Ver mis apeustas&#10;Incluye cobrar mis apuestas&#10;INcluye ver apuesta sin apostar (cerrada)&#10;Incluye estados de apuestas" />
     <MESSAGE value="Notificaciones (sin mostrar todavía)&#10;&#10;Ganar apuesta" />
     <MESSAGE value="Notificaciones&#10;Vista extra de la Apuesta" />
-    <option name="LAST_COMMIT_MESSAGE" value="Notificaciones&#10;Vista extra de la Apuesta" />
+    <MESSAGE value="Cambios estéticos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cambios estéticos" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>305</line>
+          <line>321</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>310</line>
+          <line>326</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/modules/gestorBD.js</url>
-          <line>34</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="73" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>223</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="74" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>364</line>
+          <line>380</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="89" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
+          <line>182</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="95" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

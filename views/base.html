@@ -22,12 +22,15 @@
                 <span class="icon-bar"></span>
             </button>
             <img src="/img/logo.jpg" alt="logo"/>
+
         </div>
 
         <div class="collapse navbar-collapse" id="myNavbar">
+
             {% if usuarioSesion === null %}
             {% elif usuarioSesion.rol !== "admin" %}
             <ul class="nav navbar-nav">
+                <li><strong><p style="margin-top: 16px; color: white" id="title">RAS-BET</p></strong></li>
                 <li id="buscarapuestas"><a href="/apuesta/list">Ver apuestas</a></li>
                 <li id="misapuestas"><a href="/apuesta/misapuestas">Mis Apuestas</a></li>
                 <li id="notificaciones"><a href="/apuesta/notificaciones">Notificaciones</a></li>

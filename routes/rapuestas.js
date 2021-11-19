@@ -207,17 +207,33 @@ module.exports = function (app, swig, gestorBD) {
     app.get('/apuesta/apostar/:id', function (req, res) {
         let criterio = {"_id": gestorBD.mongo.ObjectID(req.params.id)};
         //FALTA POR HACER
-        gestorBD.obtenerApuestas(criterio, function (apuestas) {
-            if (apuestas == null || apuestas.length == 0 || apuestas[0].estado == "cerrada") {
+        let criterio_apuesta={
+            apuesta:gestorBD.mongo.ObjectId(req.params.id),
+            usuario:gestorBD.mongo.ObjectId(req.session.usuario._id)
+        }
+
+        gestorBD.obtenerApuestasUsuario(criterio_apuesta, function (apuestas_usuario){
+            if(apuestas_usuario==null){
                 res.redirect("/apuesta/list?mensaje=La apuesta no existe o no está disponible")
-            } else {
-                let respuesta = swig.renderFile('views/bapuesta.html', {
-                    usuarioSesion: req.session.usuario,
-                    apuesta: apuestas[0]
-                });
-                res.send(respuesta);
+            }else{
+                if(apuestas_usuario.length>0){
+                    res.redirect("/apuesta/list?mensaje=No se pueden realizar dos apuestas en el mismo evento")
+                }else{
+                    gestorBD.obtenerApuestas(criterio, function (apuestas) {
+                        if (apuestas == null || apuestas.length == 0 || apuestas[0].estado == "cerrada") {
+                            res.redirect("/apuesta/list?mensaje=La apuesta no existe o no está disponible")
+                        } else {
+                            let respuesta = swig.renderFile('views/bapuesta.html', {
+                                usuarioSesion: req.session.usuario,
+                                apuesta: apuestas[0]
+                            });
+                            res.send(respuesta);
+                        }
+                    })
+                }
             }
         })
+
     });
 
     app.post("/apuesta/apostar/:id", function (req, res) {
