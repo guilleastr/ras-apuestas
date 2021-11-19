@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1a999f6e-0712-4ea4-90fd-2bda813ad806" name="Default Changelist" comment="inicio sesion + logo">
-      <change afterPath="$PROJECT_DIR$/views/bapuesta-admin.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/bapuesta-view.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/gestorBD.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/gestorBD.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/rapuestas.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/rapuestas.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/bapuestas_propias.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/bapuestas_propias.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/bnotificaciones.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/bnotificaciones.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +115,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637325821607</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Notificaciones (sin mostrar todavía)&#10;&#10;Ganar apuesta">
+      <created>1637338263562</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1637338263562</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,20 +144,21 @@
     <MESSAGE value="Apuestas funcionando" />
     <MESSAGE value="Ver mis apuestas funcionando:&#10;Problema con mostrar duplicados" />
     <MESSAGE value="Apostar corregido&#10;Incluye Ver mis apeustas&#10;Incluye cobrar mis apuestas&#10;INcluye ver apuesta sin apostar (cerrada)&#10;Incluye estados de apuestas" />
-    <option name="LAST_COMMIT_MESSAGE" value="Apostar corregido&#10;Incluye Ver mis apeustas&#10;Incluye cobrar mis apuestas&#10;INcluye ver apuesta sin apostar (cerrada)&#10;Incluye estados de apuestas" />
+    <MESSAGE value="Notificaciones (sin mostrar todavía)&#10;&#10;Ganar apuesta" />
+    <option name="LAST_COMMIT_MESSAGE" value="Notificaciones (sin mostrar todavía)&#10;&#10;Ganar apuesta" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>306</line>
+          <line>305</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>311</line>
+          <line>310</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="70" />
         </line-breakpoint>
@@ -161,9 +170,15 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>224</line>
+          <line>223</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
+          <line>364</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="89" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
