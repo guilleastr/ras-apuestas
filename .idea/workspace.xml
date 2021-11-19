@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1a999f6e-0712-4ea4-90fd-2bda813ad806" name="Default Changelist" comment="inicio sesion + logo">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/bapuesta.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/bapuesta.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/blistarapuestas.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/blistarapuestas.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637348997828</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Cambios de nombres 3">
+      <created>1637349250083</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1637349250083</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,7 +186,8 @@
     <MESSAGE value="Más cambios y ajustes" />
     <MESSAGE value="Cambios de nombres" />
     <MESSAGE value="Cambios de nombres 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cambios de nombres 2" />
+    <MESSAGE value="Cambios de nombres 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cambios de nombres 3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -102,7 +102,7 @@ require("./routes/radmin.js")(app, swig, gestorBD);
 require("./routes/rapuestas.js")(app, swig, gestorBD, mongo);
 
 app.get('/', function (req, res) {
-    res.redirect('/identificarse');
+    res.redirect('/evento/list');
 })
 
 app.listen(8081, function () {
