@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block titulo %} Registrar usuario {% endblock %}
+
+{% block contenido_principal %}
+<h2>Monedero</h2>
+<table class="table table-hover">
+<thead>
+<tr>
+    <th>Euro</th>
+    <th>Dollar</th>
+    <th>Cardano</th>
+    <th>Pounds</th>
+
+</tr>
+</thead>
+
+<tbody>
+<tr>
+    <td><a href="/monedero/Euros">{{ euro }}</a> </td>
+    <td><a href="/monedero/Dollars">{{ dollar }}</a>  </td>
+    <td><a href="/monedero/Cardano">{{ cardano }}</a>  </td>
+    <td><a href="/monedero/Pound">{{ pounds }}</a>  </td>
+
+</tr>
+
+
+<!-- Fin del Bloque oferta -->
+</tbody>
+</table>
+
+<p> Click on an amount to operate currencys</p>
+
+{% endblock %}

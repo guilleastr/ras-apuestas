@@ -78,6 +78,7 @@ routerUsuarioAdmin.use(function (req, res, next) {
 //Aplicar routerUsuarioSession
 
 app.use("/apuesta/*", routerUsuarioSession);
+app.use("/monedero", routerUsuarioSession);
 app.use("/evento/*", routerUsuarioSession);
 
 
