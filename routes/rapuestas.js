@@ -260,12 +260,38 @@ module.exports = function (app, swig, gestorBD) {
                             res.redirect("/apuesta/apostar/" + req.params.id + "?mensaje=Error al realizar la apuesta")
                         } else {
                             let usuario = usuarios[0]
-                            let user_money = Number(usuario.money)
+                            let apuesta_currency = apuesta.currency_value
+
                             let apuesta_money = Number(apuesta.money)
-                            usuario.money = String(user_money - apuesta_money)
+
+                            let user_money = Number(usuario.money_dolar)
+                            if(apuesta_currency=="Dollars") {
+                                user_money = Number(usuario.money_dolar)
+
+                                usuario.money_dolar = String(user_money - apuesta_money)
+                                console.log("dollar")
+                            }
+                            if(apuesta_currency=="Euros") {
+                                user_money = Number(usuario.money)
+
+                                usuario.money = String(user_money - apuesta_money)
+                                console.log("euro")
+                            }
+                            if(apuesta_currency=="Pounds") {
+                                user_money = Number(usuario.money_libra)
+
+                                usuario.money_libra = String(user_money - apuesta_money)
+                                console.log("libra")
+                            }
+                            if(apuesta_currency=="Cardano") {
+                                user_money = Number(usuario.money_cripto)
+
+                                usuario.money_cripto = String(user_money - apuesta_money)
+                                console.log("cardano")
+                            }
 
 
-                            if (user_money > apuesta_money) {
+                            if (user_money >= apuesta_money) {
                                 if (apuesta.equipo == "visitante") {
                                     apuesta.cuota = apuestas[0].cuotavisitante
                                 } else if (apuesta.equipo == "visitante") {
@@ -315,7 +341,25 @@ module.exports = function (app, swig, gestorBD) {
                         _id: gestorBD.mongo.ObjectId(req.session.usuario._id)
                     }
                     let usuario = req.session.usuario
-                    usuario.money = String(Number(usuario.money) + Number(apuestas_usuario[0].money) * Number(apuestas_usuario[0].cuota))
+                    let tipoMoneda = apuestas_usuario[0].currency_value
+                    if(tipoMoneda=="Dollars") {
+                        user_money = Number(usuario.money_cripto)
+
+                        usuario.money_cripto = String(user_money - apuesta_money)
+                        console.log("Dollars")
+                    }
+                    if(tipoMoneda=="Euros") {
+                        usuario.money = String(Number(usuario.money) + Number(apuestas_usuario[0].money) * Number(apuestas_usuario[0].cuota))
+                        console.log("Euros")
+                    }
+                    if(tipoMoneda=="Pounds") {
+                        usuario.money_libra = String(Number(usuario.money_libra) + Number(apuestas_usuario[0].money) * Number(apuestas_usuario[0].cuota))
+                    }
+                    if(tipoMoneda=="Cardano") {
+                        usuario.money_cripto = String(Number(usuario.money) + Number(apuestas_usuario[0].money) * Number(apuestas_usuario[0].cuota))
+                        console.log("cardano")
+                    }
+
                     usuario._id = usuario_id
                     req.session.usuario = usuario
 
