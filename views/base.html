@@ -34,6 +34,7 @@
                 <li id="buscarapuestas"><a href="/evento/list">Ver eventos</a></li>
                 <li id="misapuestas"><a href="/apuesta/misapuestas">Mis Apuestas</a></li>
                 <li id="notificaciones"><a href="/apuesta/notificaciones">Notificaciones</a></li>
+                <li id="monedero"><a href="/usuario/monedero">Monedero</a></li>
             </ul>
             {% elif usuarioSesion.rol === "admin" %}
             <ul class="nav navbar-nav">
@@ -49,6 +50,9 @@
                 {% else %}
                 {%if usuarioSesion.rol !== "admin" %}
                 <li><a><span class="glyphicon glyphicon-euro"> </span>{{ usuarioSesion.money }}</a></li>
+                <li><a>$ {{ usuarioSesion.money_dolar }} </a></li>
+                <li><a>£ {{ usuarioSesion.money_libra }} </a></li>
+                <li><a><span class="glyphicon glyphicon-bitcoin"> </span>{{ usuarioSesion.money_cripto }}</a></li>
                 {%endif%}}
                 <li><a href="/desconectarse"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a>
                     {% endif%}
