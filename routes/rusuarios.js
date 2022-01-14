@@ -158,4 +158,138 @@ module.exports = function (app, swig, gestorBD) {
         }
     });
 
+
+
+    app.get("/monedero/:currency", function (req,res){
+        let currency=req.params.currency;
+
+        var criterio = {_id: gestorBD.mongo.ObjectID(req.session.usuario._id)};
+        gestorBD.obtenerUsuarios(criterio,function (usuarios) {
+            if (usuarios==null){
+                res.redirect("/index?mensaje=Error al listar usuarios");
+            } else {
+                let usuario=usuarios[0]
+                let current={
+                };
+                current.currency=currency;
+                if(currency=="Euros"){
+                    current.amount=usuario.money
+                }
+                else if(currency=="Dollars"){
+                    current.amount=usuario.money_dolar
+                }else if(currency=="Cardano"){
+                    current.amount=usuario.money_cripto
+                }else{
+                    current.amount=usuario.money_libra
+                }
+
+                let respuesta = swig.renderFile('views/operate_currency.html', {
+                    usuarioSesion: req.session.usuario,
+                    current: current
+                });
+                res.send(respuesta);
+            }
+        })
+
+    })
+    app.post("/monedero/:currency", function (req,res){
+        let currency=req.params.currency;
+        let money= req.body.money;
+        let currency_destin=req.body.currency_value;
+
+        var criterio = {_id: gestorBD.mongo.ObjectID(req.session.usuario._id)};
+        gestorBD.obtenerUsuarios(criterio,function (usuarios) {
+            if (usuarios==null){
+                res.redirect("/index?mensaje=Error al listar usuarios");
+            } else {
+                let usuario=usuarios[0]
+                let current={
+                };
+                current.currency=currency;
+                let factor=0;
+                if(currency=="Euros"){
+                   usuario.money=usuario.money-money;
+                   if(currency_destin=="Dollars"){
+                        factor=1.4;
+                   }else if(currency_destin=="Cardano"){
+                       factor=0.4;
+                   }else{
+                       factor=1.2;
+                    }
+                }
+                else if(currency=="Dollars"){
+                   usuario.money_dolar=usuario.money_dolar-money;
+                    if(currency_destin=="Euros"){
+                        factor=0.88;
+                    }else if(currency_destin=="Cardano"){
+                        factor=0.3;
+                    }else{
+                        factor=0.73;
+                    }
+
+                }else if(currency=="Cardano"){
+                    usuario.money_cripto=usuario.money_cripto-money;
+                    if(currency_destin=="Dollars"){
+                        factor=4;
+
+                    }else if(currency_destin=="Euros"){
+                        factor=5;
+                    }else{
+                        factor= 4.5;
+                    }
+
+                }else{
+                    usuario.money_libra=usuario.money_libra-money;
+                    if(currency_destin=="Euros"){
+                        factor =1,20
+                    }else if(currency_destin=="Cardano"){
+                        factor=0.35
+                    }else if(currency_destin=="Dollars"){
+                            factor=1.37
+                    }
+                }
+
+
+                if(currency_destin=="Euros"){
+                    usuario.money=usuario.money + money*factor;
+                }
+                else if(currency_destin=="Dollars"){
+                    usuario.money_dolar=usuario.money_dolar +money*factor;
+
+                }else if(currency_destin=="Cardano"){
+                    usuario.money_cripto=usuario.money_cripto+ money*factor;
+                }else{
+                    usuario.money_libra=usuario.money_libra+ money*factor;
+                }
+
+                gestorBD.actualizarUsuario(criterio,usuario,function (){
+
+                    res.redirect("/monedero")
+                })
+
+
+            }
+        })
+
+    })
+
+    app.get("/monedero", function (req,res){
+        var criterio = {_id: gestorBD.mongo.ObjectID(req.session.usuario._id)};
+        gestorBD.obtenerUsuarios(criterio,function (usuarios) {
+            if (usuarios==null){
+                res.redirect("/index?mensaje=Error al listar usuarios");
+            } else {
+                let respuesta = swig.renderFile('views/monedero.html', {
+                    usuarioSesion: req.session.usuario,
+                    euro:usuarios[0]. money ,
+                    dollar: usuarios[0].money_dolar,
+                    cardano: usuarios[0].money_cripto,
+                    pounds:usuarios[0].money_libra
+                });
+                res.send(respuesta);
+            }
+        })
+
+    })
+
 }

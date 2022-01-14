@@ -165,10 +165,11 @@ module.exports = function (app, swig, gestorBD) {
     app.get("/apuesta/misapuestas", function (req, res) {
         let criterio = {usuario: gestorBD.mongo.ObjectId(req.session.usuario._id)}
 
-        gestorBD.obtenerApuestas(criterio, function (apuestas) {
-            if (apuestas == null) {
+        gestorBD.obtenerApuestas(criterio, function (apuestasVAR) {
+            if (apuestasVAR == null) {
 
             } else {
+                let apuestas=apuestasVAR
                 let list = []
                 for (let i = 0; i < apuestas.length; i++) {
                     list.push(apuestas[i].evento)

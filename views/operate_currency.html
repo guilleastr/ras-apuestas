@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block titulo %} Registrar usuario {% endblock %}
+
+{% block contenido_principal %}
+
+
+<style>
+
+    .column {
+        float: left;
+        width: 29%;
+        border-radius: 10px;
+        background: lightcyan;
+        margin: 23px;
+        padding: 5px;
+    }
+    .bet{
+        border-radius: 10px;
+        background: lightblue;
+        margin: 23px;
+        padding: 20px;
+    }
+
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .child {
+        width: 30%;
+    }
+
+    #currency_value{
+        visibility: hidden;
+        width: 0;
+        height: 0;
+    }
+
+</style>
+<h2>Cambiar moneda: {{current.currency}} | Amount: {{current.amount}}</h2>
+
+<div class="row">
+    <div>
+        <label for="currency">Select Currency</label>
+        <select id="currency" class="autocomplete">
+            <option value="1">Dollars</option>
+            <option value="2">Euros</option>
+            <option value="3">Pounds</option>
+            <option value="4">Cardano</option>
+        </select>
+    </div>
+
+    <div class="column">
+        <h3> Change currency </h3>
+        <form  method="post" action="/monedero/{{current.currency}}">
+            <div class="child">
+                <input id="money" type="number" class="form-control" name="money" placeholder="Ej: 2.50" required="true" />
+            </div>
+
+            <input id="currency_value" type="text" class="form-control"  name="currency_value" required="true" />
+            <input type="submit" value="Cambiar monedas" />
+        </form>
+        </p>
+
+    </div>
+
+
+</div>
+
+</div>
+<script>
+
+    $(".form-control").val($("#currency").find('option').filter(':selected').text());
+    $('#currency').change(function(){ // when a option is selected
+        $(".form-control").val($(this).find('option').filter(':selected').text());
+    });
+</script>
+
+
+
+{% endblock %}
