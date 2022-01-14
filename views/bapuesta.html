@@ -41,9 +41,13 @@
     button{
         alignment: right;
     }
+    .currency_value {
+    }
     input{
         alignment: right;
     }
+
+
 </style>
 
 <div class="bet">
@@ -53,11 +57,23 @@
 <p class="text_important">Fecha: {{apuesta.fecha}}</p>
 
     <div class="row">
+        <div>
+            <label for="currency">Select Currency</label>
+            <select id="currency" class="autocomplete">
+                <option value="1">Dollars</option>
+                <option value="2">Euros</option>
+                <option value="3">Pounds</option>
+                <option value="4">Cardano</option>
+            </select>
+        </div>
+
         <div class="column">
             <h3> Equipo visitante : {{apuesta.visitante}} </h3>
 
             <p><strong>Cuota:  {{apuesta.cuotavisitante}}</strong>
                 {%if apuesta.estado==="abierta"%}
+
+
             <form  method="post" action="/apuesta/apostar/{{apuesta._id.toString()}}?equipo=visitante">
             Cuantía a apostar
                 <div class="child">
@@ -65,6 +81,7 @@
                     <input id="money" type="number" class="form-control" name="money" placeholder="Ej: 2.50" required="true" />
                 </div>
 
+            <input id="currency_value" type="text" class="form-control" required="true" />
                 <input type="submit" value="Apostar visitante" />
             </form>
             {%endif%}
@@ -82,7 +99,11 @@
                     <div class="child">
                         <input id="money" type="number" class="form-control" name="money" placeholder="Ej: 2.50" required="true" />
                     </div>
+
+            <input id="currency_value" type="text" class="form-control" required="true" />
                     <input type="submit" value="Apostar empate" />
+
+
 
                 </form>
             {%endif%}
@@ -93,10 +114,13 @@
             <p><strong>Cuota: {{apuesta.cuotalocal}}</strong>
                 {%if apuesta.estado==="abierta"%}
                 <form method="post" action="/apuesta/apostar/{{apuesta._id.toString()}}?equipo=local">
-            Cuantía a apostar
+                        Cuantía a apostar
                     <div class="child">
                         <input id="money" type="number" class="form-control" name="money" placeholder="Ej: 2.50" required="true" />
+
                     </div>
+
+            <input id="currency_value" type="text" class="form-control" required="true" />
                     <input type="submit" value="Apostar local" />
 
                 </form>
@@ -106,6 +130,13 @@
     </div>
 
 </div>
+<script>
+
+    $(".form-control").val($("#currency").find('option').filter(':selected').text());
+    $('#currency').change(function(){ // when a option is selected
+        $(".form-control").val($(this).find('option').filter(':selected').text());
+    });
+</script>
 
 
 

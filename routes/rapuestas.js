@@ -208,7 +208,7 @@ module.exports = function (app, swig, gestorBD) {
             usuario:gestorBD.mongo.ObjectId(req.session.usuario._id)
         }
 
-        gestorBD.obtenerApuestas(criterio_apuesta, function (apuestas){
+            gestorBD.obtenerApuestas(criterio_apuesta, function (apuestas){
             if(apuestas==null){
                 res.redirect("/evento/list?mensaje=La apuesta no existe o no está disponible")
             }else{
@@ -237,6 +237,7 @@ module.exports = function (app, swig, gestorBD) {
             evento: gestorBD.mongo.ObjectID(req.params.id),
             equipo: req.query.equipo,
             money: req.body.money,
+            currency_value: req.body.currency_value,
             usuario: gestorBD.mongo.ObjectID(req.session.usuario._id),
             ganada: false,
             cobrada: false
