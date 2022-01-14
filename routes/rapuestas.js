@@ -343,10 +343,10 @@ module.exports = function (app, swig, gestorBD) {
                     }
                     let usuario = req.session.usuario
                     let tipoMoneda = apuestas_usuario[0].currency_value
+                    console.log(tipoMoneda)
                     if(tipoMoneda=="Dollars") {
-                        user_money = Number(usuario.money_cripto)
 
-                        usuario.money_cripto = String(user_money - apuesta_money)
+                        usuario.money_dolar = String(Number(usuario.money_dolar) + Number(apuestas_usuario[0].money) * Number(apuestas_usuario[0].cuota))
                         console.log("Dollars")
                     }
                     if(tipoMoneda=="Euros") {
@@ -355,9 +355,10 @@ module.exports = function (app, swig, gestorBD) {
                     }
                     if(tipoMoneda=="Pounds") {
                         usuario.money_libra = String(Number(usuario.money_libra) + Number(apuestas_usuario[0].money) * Number(apuestas_usuario[0].cuota))
+                        console.log("Pounds")
                     }
                     if(tipoMoneda=="Cardano") {
-                        usuario.money_cripto = String(Number(usuario.money) + Number(apuestas_usuario[0].money) * Number(apuestas_usuario[0].cuota))
+                        usuario.money_cripto = String(Number(usuario.money_cripto) + Number(apuestas_usuario[0].money) * Number(apuestas_usuario[0].cuota))
                         console.log("cardano")
                     }
 
