@@ -111,13 +111,31 @@ module.exports = {
             }
         });
     },
-    actualizarApuestas: function (criterio, usuario, funcionCallback) {
+    actualizarApuestas: function (criterio, apuesta, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
             if (err) {
                 funcionCallback(null);
             } else {
                 let collection = db.collection('apuestas');
-                collection.findOneAndUpdate(criterio,usuario, function (err, result) {
+
+                collection.updateMany(criterio,apuesta, function (err, result) {
+
+                    funcionCallback(result);
+
+                    db.close();
+                });
+            }
+        });
+    },
+
+    actualizarApuesta: function (criterio, apuesta, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                let collection = db.collection('apuestas');
+
+                collection.findOneAndUpdate(criterio,apuesta, function (err, result) {
 
                     funcionCallback(result);
 

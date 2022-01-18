@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1a999f6e-0712-4ea4-90fd-2bda813ad806" name="Default Changelist" comment="inicio sesion + logo">
-      <change afterPath="$PROJECT_DIR$/views/monedero.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/operate_currency.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/gestorBD.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/gestorBD.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/rapuestas.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/rapuestas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/rusuarios.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/rusuarios.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/bapuesta.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/bapuesta.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/bapuestas_propias.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/bapuestas_propias.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/operate_currency.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/operate_currency.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +170,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642186180041</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Solved everything&#10;&#10;@uo265578">
+      <created>1642191152398</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1642191152398</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -202,55 +207,21 @@
     <MESSAGE value="Cambios de nombres 2" />
     <MESSAGE value="Cambios de nombres 3" />
     <MESSAGE value="Solving gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="Solving gitignore" />
+    <MESSAGE value="Solved everything&#10;&#10;@uo265578" />
+    <option name="LAST_COMMIT_MESSAGE" value="Solved everything&#10;&#10;@uo265578" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>245</line>
+          <line>253</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>348</line>
+          <line>428</line>
           <option name="timeStamp" value="89" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>179</line>
-          <option name="timeStamp" value="95" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>174</line>
-          <option name="timeStamp" value="96" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>209</line>
-          <option name="timeStamp" value="97" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>363</line>
-          <option name="timeStamp" value="98" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>373</line>
-          <option name="timeStamp" value="99" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>126</line>
-          <option name="timeStamp" value="101" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>131</line>
-          <option name="timeStamp" value="102" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/rusuarios.js</url>
@@ -266,35 +237,29 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>94</line>
+          <line>93</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="109" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>99</line>
+          <line>98</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="110" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>112</line>
+          <line>199</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="111" />
+          <option name="timeStamp" value="115" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/rapuestas.js</url>
-          <line>114</line>
+          <line>187</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="112" />
+          <option name="timeStamp" value="118" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="NodeJSConfigurationType">
-        <watch expression="req.body.currency" language="JavaScript" />
-        <watch expression="req.body" language="JavaScript" />
-      </configuration>
-    </watches-manager>
   </component>
 </project>

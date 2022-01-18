@@ -17,6 +17,7 @@
             <th>Apostado a</th>
             <th>Cantidad</th>
             <th>Cuota de Victoria</th>
+            <th>Moneda</th>
             {% if usuarioSesion.rol === 'admin'%}
             <th>Abrir/Cerrar</th>
 
@@ -63,6 +64,7 @@
                 <a id="btCerrarApuesta" href="/apuesta/cerrar/{{ evento._id.toString() }}">Cerrar</a> <br>
             </td>
             {% elif usuarioSesion.rol%}
+            <td>{{evento.apuesta.currency_value}}</td>
             <td>
                 <a id="btApostar" href="/apuesta/ver/{{ evento._id.toString() }}">Ver</a> <br>
             </td>

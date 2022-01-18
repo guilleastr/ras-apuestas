@@ -47,6 +47,18 @@
         alignment: right;
     }
 
+    #currency_value1{
+        visibility: hidden;
+    }
+
+    #currency_value2{
+        visibility: hidden;
+    }
+    #currency_value3{
+        visibility: hidden;
+    }
+
+
 
 </style>
 
@@ -58,7 +70,7 @@
 
     <div class="row">
         <div>
-            <label for="currency">Select Currency</label>
+            <label for="currency">Selecciona Moneda</label>
             <select id="currency" class="autocomplete">
                 <option value="1">Dollars</option>
                 <option value="2">Euros</option>
@@ -81,7 +93,7 @@
                     <input id="money" type="number" class="form-control" name="money" placeholder="Ej: 2.50" required="true" />
                 </div>
 
-            <input id="currency_value" type="text" class="form-control" required="true" />
+            <input id="currency_value1" type="text" class="form-control" name="currency_value" />
                 <input type="submit" value="Apostar visitante" />
             </form>
             {%endif%}
@@ -100,7 +112,7 @@
                         <input id="money" type="number" class="form-control" name="money" placeholder="Ej: 2.50" required="true" />
                     </div>
 
-            <input id="currency_value" type="text" class="form-control" name="currency_value" required="true" />
+            <input id="currency_value2" type="text" class="form-control" name="currency_value"  />
                     <input type="submit" value="Apostar empate" />
 
 
@@ -120,7 +132,7 @@
 
                     </div>
 
-            <input id="currency_value" type="text" class="form-control" name="currency_value" required="true" />
+            <input id="currency_value3" type="text" class="form-control" name="currency_value"  />
                     <input type="submit" value="Apostar local" />
 
                 </form>
